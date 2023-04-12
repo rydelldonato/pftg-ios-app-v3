@@ -7,13 +7,13 @@ const client = new DoorDashClient({
     signing_secret: process.env.SIGNING_SECRET,
   })
 
-const response = client
-  .getDelivery('a12c6ef9-0f15-4484-be8b-02acd3ec1281')
-  .then(response => {
-    console.log(response.data)
+export async function getDelivery(props) { await client
+  .getDelivery(props.deliveryId)
+  .then(getDelivery => {
+    console.log(getDelivery.data)
   })
   .catch(err => {
     console.log(err)
   })
-
-  console.log(response)
+}
+'a12c6ef9-0f15-4484-be8b-02acd3ec1281'

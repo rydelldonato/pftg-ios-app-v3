@@ -6,8 +6,8 @@ import SignUp from './ui/signUpPopUp/signUp';
 export default function App() {
   return (
     <View style={styles.container}>
-      <SignUp/>
-      {/* <Welcome/> */}
+      {/* <SignUp/> */}
+      <Welcome/>
       <StatusBar style="auto" />
     </View>
   );

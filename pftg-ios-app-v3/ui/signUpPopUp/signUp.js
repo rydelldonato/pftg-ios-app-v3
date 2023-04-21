@@ -12,9 +12,8 @@ import styles from "./styles";
 import TermsPopUp from "../termsPopUp/termsPopUp";
 
 export default function signUp(props) {
-  const { visible } = props;
+  const { modalVisible,setModalVisible } = props;
 
-  const [modalVisible, setModalVisible] = useState(visible);
   const [termsModal, setTermsModal] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -29,7 +28,6 @@ export default function signUp(props) {
   };
 
   const handleTermsLink = () => {
-    setModalVisible(false);
     setTermsModal(true);
   };
 
@@ -43,17 +41,17 @@ export default function signUp(props) {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={visible}
+        visible={modalVisible}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
-          visible = !visible;
+          setModalVisible = !modalVisible;
         }}
         style={{ zIndex: 2 }}
       >
         <TermsPopUp termsModal={termsModal} setTermsModal={setTermsModal} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Pressable onPress={visible}>
+            <Pressable onPress={()=>setModalVisible(!modalVisible)}>
               <Text style={[styles.exit]}>X</Text>
             </Pressable>
             <Text

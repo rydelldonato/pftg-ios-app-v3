@@ -35,7 +35,7 @@ export default function welcome() {
 
   return (
     <View style={styles.welcomePage}>
-      <SignUp visible={modalVisible} />
+      <SignUp modalVisible={modalVisible} setModalVisible={setModalVisible}  />
       <View style={styles.logo}>
         <Image source={require("../../assets/welcome-page-logo.png")} />
       </View>

@@ -10,6 +10,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import SignUp from "../../ui/signUpPopUp/signUp";
 import React, { useState } from "react";
 import styles from "./styles";
 import {
@@ -18,44 +19,9 @@ import {
 } from "@expo-google-fonts/julius-sans-one";
 import { K2D_400Regular, K2D_600SemiBold } from "@expo-google-fonts/k2d";
 
-// class ImageLoader extends Component {
-//   state = {
-//     opacity: new Animated.Value(0),
-//   };
-
-//   onLoad = () => {
-//     Animated.timing(this.state.opacity, {
-//       toValue: 1,
-//       duration: 2000,
-//       useNativeDriver: true,
-//     }).start();
-//   };
-
-//   render() {
-//     return (
-//       <Animated.Image
-//         onLoad={this.onLoad}
-//         {...this.props}
-//         style={[
-//           {
-//             opacity: this.state.opacity,
-//             transform: [
-//               {
-//                 scale: this.state.opacity.interpolate({
-//                   inputRange: [0, 1],
-//                   outputRange: [0.85, 1],
-//                 }),
-//               },
-//             ],
-//           },
-//           this.props.style,
-//         ]}
-//       />
-//     );
-//   }
-// }
 
 export default function welcome() {  
+  const [modalVisible, setModalVisible] = useState(false);
   // const [signUpWindow, setSignUpWindow] = useState(false);
 
   let [fontsLoaded] = useFonts({
@@ -69,6 +35,7 @@ export default function welcome() {
 
   return (
     <View style={styles.welcomePage}>
+      <SignUp visible={modalVisible} />
       <View style={styles.logo}>
         <Image source={require("../../assets/welcome-page-logo.png")} />
       </View>

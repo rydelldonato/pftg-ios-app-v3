@@ -11,8 +11,8 @@ import React, { useState } from "react";
 import styles from "./styles";
 import TermsPopUp from "../termsPopUp/termsPopUp";
 
-export default function signUp() {
-  const [modalVisible, setModalVisible] = useState(true);
+export default function signUp(props) {
+    const {visible} = props
   const [termsModal, setTermsModal] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -20,14 +20,14 @@ export default function signUp() {
 
   const handleSubmit = () => {
     // Do something with the username and password
-    setModalVisible(!modalVisible);
+    visible = !visible
     setEmail("");
     setPassword("");
     window.alert(`Email: ${email}, Password: ${password}`);
   };
 
   const handleTermsLink = () => {
-    setModalVisible(!modalVisible);
+    visible = !visible;
     setTermsModal(!termsModal);
   };
 
@@ -42,15 +42,15 @@ export default function signUp() {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={visible}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
+          visible = !visible;
         }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Pressable onPress={modalVisible}>
+            <Pressable onPress={visible}>
               <Text style={[styles.exit]}>X</Text>
             </Pressable>
             <Text
@@ -132,12 +132,6 @@ export default function signUp() {
                 </Text>
               </TouchableHighlight>
             </View>
-            {/* <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable> */}
           </View>
         </View>
       </Modal>

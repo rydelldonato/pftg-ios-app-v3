@@ -12,7 +12,9 @@ import styles from "./styles";
 import TermsPopUp from "../termsPopUp/termsPopUp";
 
 export default function signUp(props) {
-    const {visible} = props
+  const { visible } = props;
+
+  const [modalVisible, setModalVisible] = useState(visible);
   const [termsModal, setTermsModal] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -20,15 +22,15 @@ export default function signUp(props) {
 
   const handleSubmit = () => {
     // Do something with the username and password
-    visible = !visible
+    setModalVisible(!modalVisible);
     setEmail("");
     setPassword("");
     window.alert(`Email: ${email}, Password: ${password}`);
   };
 
   const handleTermsLink = () => {
-    visible = !visible;
-    setTermsModal(!termsModal);
+    setModalVisible(false);
+    setTermsModal(true);
   };
 
   return (
@@ -38,7 +40,6 @@ export default function signUp(props) {
         { justifyContent: "center", alignItems: "center" },
       ]}
     >
-      <TermsPopUp visible={termsModal} />
       <Modal
         animationType="slide"
         transparent={true}
@@ -47,7 +48,9 @@ export default function signUp(props) {
           Alert.alert("Modal has been closed.");
           visible = !visible;
         }}
+        style={{ zIndex: 2 }}
       >
+        <TermsPopUp termsModal={termsModal} setTermsModal={setTermsModal} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable onPress={visible}>

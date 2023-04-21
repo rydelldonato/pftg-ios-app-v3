@@ -1,9 +1,14 @@
 import { View, Text, Modal, TouchableHighlight } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import styles from '../signUpPopUp/styles'
 
 export default function termsPopUp(props) {
-const {visible} = props
+const {termsModal, setTermsModal} = props
+
+  const handleCloseButton = () => {
+    // window.alert("hello")
+    setTermsModal(false)
+  };
 
   return (
     <View
@@ -15,11 +20,12 @@ const {visible} = props
         <Modal
           animationType="fade"
           transparent={true}
-          visible={visible}
+          visible={termsModal}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
             setTermsModal(!termsModal);
           }}
+          style={{zIndex:1}}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -62,7 +68,8 @@ const {visible} = props
                 application, users agree to the privacy policy.
               </Text>
               <View>
-                <TouchableHighlight
+                <TouchableHighlight 
+                    onPress={handleCloseButton}
                   style={[styles.button, { backgroundColor: "#FAEDCD" }]}
                 >
                   <Text
@@ -79,12 +86,6 @@ const {visible} = props
                   </Text>
                 </TouchableHighlight>
               </View>
-              {/* <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable> */}
             </View>
           </View>
         </Modal>

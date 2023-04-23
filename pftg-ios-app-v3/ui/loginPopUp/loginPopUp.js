@@ -2,19 +2,16 @@ import {
   View,
   Text,
   Modal,
-  Pressable,
   TextInput,
-  TouchableOpacity,
   TouchableHighlight,
+  Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
-import TermsPopUp from "../termsPopUp/termsPopUp";
 
-export default function signUp(props) {
+
+export default function loginPopUp(props) {
   const { modalVisible, setModalVisible } = props;
-
-  const [termsModal, setTermsModal] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,14 +24,10 @@ export default function signUp(props) {
     window.alert(`Email: ${email}, Password: ${password}`);
   };
 
-  const handleTermsLink = () => {
-    setTermsModal(true);
-  };
-
   return (
     <View
       style={[
-        styles.SignUpModal,
+        styles.loginModal,
         { justifyContent: "center", alignItems: "center" },
       ]}
     >
@@ -48,7 +41,6 @@ export default function signUp(props) {
         }}
         style={{ zIndex: 2 }}
       >
-        <TermsPopUp termsModal={termsModal} setTermsModal={setTermsModal} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable onPress={() => setModalVisible(!modalVisible)}>
@@ -64,20 +56,7 @@ export default function signUp(props) {
                 },
               ]}
             >
-              Sign up
-            </Text>
-            <Text
-              style={[
-                styles.modalText,
-                {
-                  fontFamily: "K2D_400Regular",
-                  textAlign: "center",
-                  fontSize: 15,
-                },
-              ]}
-            >
-              Looks like you don't have an account. Let's create a new account
-              for you
+              Login
             </Text>
             <View>
               <TextInput
@@ -93,28 +72,6 @@ export default function signUp(props) {
                 secureTextEntry={true}
                 style={styles.input}
               />
-              <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-                <Text
-                  style={[
-                    styles.modalText,
-                    {
-                      fontFamily: "K2D_400Regular",
-                      textAlign: "center",
-                      fontSize: 15,
-                    },
-                  ]}
-                >
-                  By selecting Agree and continue below, I agree to{" "}
-                  <TouchableOpacity
-                    style={{ shiftDistanceY: 0 }}
-                    onPress={handleTermsLink}
-                  >
-                    <Text style={{ textDecorationLine: "underline" }}>
-                      Terms of Service and Privacy Policy
-                    </Text>
-                  </TouchableOpacity>
-                </Text>
-              </View>
               <TouchableHighlight
                 onPress={handleSubmit}
                 style={[styles.button, { backgroundColor: "#FAEDCD" }]}
@@ -132,6 +89,17 @@ export default function signUp(props) {
                   Submit
                 </Text>
               </TouchableHighlight>
+              <View style={{ display: "flex", flexDirection: "row", marginTop: 35 }}>
+                <Text>Don't have an account yet? </Text>
+                <TouchableHighlight>
+                  <Text style={{color: "#82B77D"}}>Sign Up</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={{marginTop: 23}}>
+                <TouchableHighlight>
+                  <Text style={{color: "#82B77D"}} >Forgot your password?</Text>
+                </TouchableHighlight>
+              </View>
             </View>
           </View>
         </View>

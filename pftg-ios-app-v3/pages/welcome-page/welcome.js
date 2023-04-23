@@ -1,16 +1,6 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Animated,
-  TouchableHighlight,
-  Modal,
-  Pressable,
-  Button,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, TouchableHighlight, Image } from "react-native";
 import SignUp from "../../ui/signUpPopUp/signUp";
+import LoginPopUp from "../../ui/loginPopUp/loginPopUp";
 import React, { useState } from "react";
 import styles from "./styles";
 import {
@@ -19,10 +9,9 @@ import {
 } from "@expo-google-fonts/julius-sans-one";
 import { K2D_400Regular, K2D_600SemiBold } from "@expo-google-fonts/k2d";
 
-
-export default function welcome() {  
-  const [modalVisible, setModalVisible] = useState(false);
-  // const [signUpWindow, setSignUpWindow] = useState(false);
+export default function welcome() {
+  const [signUpModalVisible, setSignUpModalVisible] = useState(false);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
 
   let [fontsLoaded] = useFonts({
     JuliusSansOne_400Regular,
@@ -35,7 +24,8 @@ export default function welcome() {
 
   return (
     <View style={styles.welcomePage}>
-      <SignUp modalVisible={modalVisible} setModalVisible={setModalVisible}  />
+      <SignUp modalVisible={signUpModalVisible} setModalVisible={setSignUpModalVisible} />
+      <LoginPopUp modalVisible={loginModalVisible} setModalVisible={setLoginModalVisible} />
       <View style={styles.logo}>
         <Image source={require("../../assets/welcome-page-logo.png")} />
       </View>
@@ -59,7 +49,7 @@ export default function welcome() {
       </View>
       <View style={styles.buttonsContainer}>
         <TouchableHighlight
-          onPress={() => setModalVisible(!modalVisible)}
+          onPress={() => setSignUpModalVisible(!signUpModalVisible)}
           style={[styles.button, { backgroundColor: "#FAEDCD" }]}
         >
           <Text
@@ -76,7 +66,7 @@ export default function welcome() {
           </Text>
         </TouchableHighlight>
         <TouchableHighlight
-          onPress={() => window.alert("Login button pressed")}
+          onPress={() => setLoginModalVisible(!loginModalVisible)}
           style={[styles.button, { backgroundColor: "#E9ECE6" }]}
         >
           <Text

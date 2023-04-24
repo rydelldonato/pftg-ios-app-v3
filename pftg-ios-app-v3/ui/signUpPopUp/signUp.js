@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableHighlight,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
@@ -46,14 +47,21 @@ export default function signUp(props) {
           Alert.alert("Modal has been closed.");
           setModalVisible = !modalVisible;
         }}
-        style={{ zIndex: 2 }}
+        style={{ zIndex: 0 }}
       >
         <TermsPopUp termsModal={termsModal} setTermsModal={setTermsModal} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Pressable onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={[styles.exit]}>X</Text>
-            </Pressable>
+            <TouchableWithoutFeedback
+              hitSlop={{ top: 170, bottom: 170, left: 170, right: 170 }}
+            >
+              <TouchableHighlight
+                style={{ marginLeft: 10, marginTop: 13 }}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={[styles.exit, { fontSize: 16 }]}>X</Text>
+              </TouchableHighlight>
+            </TouchableWithoutFeedback>
             <Text
               style={[
                 styles.modalText,

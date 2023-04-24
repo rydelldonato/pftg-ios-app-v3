@@ -1,38 +1,24 @@
-import {
-  View,
-  Text,
-  Modal,
-  TextInput,
-  TouchableHighlight,
-  Pressable,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { View, Text, Modal, TextInput, TouchableHighlight, TouchableWithoutFeedback } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
-import SignUp from "../signUpPopUp/signUp";
-import ForgotPassword from "../forgotPassword/forgotPassword";
 
-export default function loginPopUp(props) {
+
+export default function forgotPassword(props) {
   const { modalVisible, setModalVisible } = props;
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [signUpPopUp, setsignUpPopUp] = useState(false);
-  const [forgotPasswordPopUp, setForgotPasswordPopUp] = useState(false)
 
   const handleSubmit = () => {
     // Do something with the username and password
     setModalVisible(!modalVisible);
     setEmail("");
-    setPassword("");
-    window.alert(`Email: ${email}, Password: ${password}`);
+    window.alert(`Email: ${email}`);
   };
-
   return (
     <View
       style={[
-        styles.loginModal,
-        { justifyContent: "center", alignItems: "center" },
+        styles.forgotYourPasswordModal,
+        { justifyContent: "center", alignItems: "center", margin: 10 },
       ]}
     >
       <Modal
@@ -45,8 +31,6 @@ export default function loginPopUp(props) {
         }}
         style={{ zIndex: 1 }}
       >
-        <ForgotPassword modalVisible={forgotPasswordPopUp} setModalVisible={setForgotPasswordPopUp} /> 
-        <SignUp modalVisible={signUpPopUp} setModalVisible={setsignUpPopUp} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <TouchableWithoutFeedback
@@ -69,8 +53,14 @@ export default function loginPopUp(props) {
                 },
               ]}
             >
-              Login
+              Forgot your password?
             </Text>
+            <View style={{width: 300}}>
+              <Text>
+              Enter the email associated with your account to change your
+            password.
+              </Text>
+            </View>
             <View>
               <TextInput
                 placeholder="Email"
@@ -78,13 +68,7 @@ export default function loginPopUp(props) {
                 onChangeText={setEmail}
                 style={styles.input}
               />
-              <TextInput
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={true}
-                style={styles.input}
-              />
+              
               <TouchableHighlight
                 onPress={handleSubmit}
                 style={[styles.button, { backgroundColor: "#FAEDCD" }]}
@@ -102,25 +86,6 @@ export default function loginPopUp(props) {
                   Submit
                 </Text>
               </TouchableHighlight>
-              <View
-                style={{ display: "flex", flexDirection: "row", marginTop: 35 }}
-              >
-                <Text>Don't have an account yet? </Text>
-                <TouchableHighlight
-                  onPress={() => {
-                    setsignUpPopUp(!signUpPopUp);
-                  }}
-                >
-                  <Text style={{ color: "#82B77D" }}>Sign Up</Text>
-                </TouchableHighlight>
-              </View>
-              <View style={{ marginTop: 23 }}>
-                <TouchableHighlight onPress={()=>setForgotPasswordPopUp(!forgotPasswordPopUp)}>
-                  <Text style={{ color: "#82B77D" }}>
-                    Forgot your password?
-                  </Text>
-                </TouchableHighlight>
-              </View>
             </View>
           </View>
         </View>

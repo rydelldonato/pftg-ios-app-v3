@@ -3,13 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import Welcome from './pages/welcome-page/welcome';
 import SignUp from './ui/signUpPopUp/signUp';
 import LoginPopUp from './ui/loginPopUp/loginPopUp';
+import GeneralFooter from './ui/generalFooter/generalFooter';
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <SignUp/> */}
       {/* <LoginPopUp/> */}
-      <Welcome/>
+      <GeneralFooter/>
+      {/* <Welcome/> */}
       <StatusBar style="auto" />
     </View>
   );

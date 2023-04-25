@@ -4,7 +4,6 @@ import styles from "./styles";
 
 export default function generalFooter() {
   return (
-    <View style={{backgroundColor:"#82B77D", flex: 1}}>
       <View
         style={[
           styles.mainContainer,
@@ -91,6 +90,5 @@ export default function generalFooter() {
           <Text>More</Text>
         </View>
       </View>
-    </View>
   );
 }

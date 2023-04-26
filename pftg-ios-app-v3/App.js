@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Welcome from './pages/welcome-page/welcome';
-import SignUp from './ui/signUpPopUp/signUp';
-import LoginPopUp from './ui/loginPopUp/loginPopUp';
-import GeneralFooter from './ui/generalFooter/generalFooter';
-import HomePage from './pages/home-page/homePage';
+// import SignUp from './ui/signUpPopUp/signUp';
+// import LoginPopUp from './ui/loginPopUp/loginPopUp';
+// import GeneralFooter from './ui/generalFooter/generalFooter';
+// import HomePage from './pages/home-page/homePage';
 
 export default function App() {
   return (
@@ -12,8 +12,8 @@ export default function App() {
       {/* <SignUp/> */}
       {/* <LoginPopUp/> */}
       {/* <GeneralFooter/> */}
-      <HomePage/>
-      {/* <Welcome/> */}
+      {/* <HomePage/> */}
+      <Welcome/>
       <StatusBar style="auto" />
     </View>
   );

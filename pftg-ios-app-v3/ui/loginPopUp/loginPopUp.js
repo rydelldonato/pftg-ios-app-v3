@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
-import SignUp from "../signUpPopUp/signUp";
+import SignUp from "../welcomePage/signUpPopUp/signUp";
 import ForgotPassword from "../forgotPassword/forgotPassword";
 
 export default function loginPopUp(props) {

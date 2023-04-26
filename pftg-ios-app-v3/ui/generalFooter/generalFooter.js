@@ -17,7 +17,7 @@ export default function generalFooter() {
             justifyContent: "space-between",
             backgroundColor: "#FEFEFE",
             width: "100%"
-            ,paddingTop: 12,
+            ,paddingTop: 8,
             paddingBottom: 40
           },
         ]}

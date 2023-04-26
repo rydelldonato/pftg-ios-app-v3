@@ -1,7 +1,6 @@
 import { View, Text, Modal, TouchableHighlight } from "react-native";
 import React from "react";
-import styles from "../signUpPopUp/styles";
-
+import styles from "./styles";
 export default function termsPopUp(props) {
   const { termsModal, setTermsModal } = props;
 

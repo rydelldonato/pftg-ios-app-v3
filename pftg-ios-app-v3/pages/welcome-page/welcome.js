@@ -1,5 +1,5 @@
 import { View, Text, TouchableHighlight, Image } from "react-native";
-import SignUp from "../../ui/signUpPopUp/signUp";
+import SignUp from "../../ui/welcomePage/signUpPopUp/signUp";
 import LoginPopUp from "../../ui/loginPopUp/loginPopUp";
 import React, { useState } from "react";
 import styles from "./styles";

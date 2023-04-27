@@ -8,8 +8,11 @@ import {
   JuliusSansOne_400Regular,
 } from "@expo-google-fonts/julius-sans-one";
 import { K2D_400Regular, K2D_600SemiBold } from "@expo-google-fonts/k2d";
+import HomePage from "../home-page/homePage";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function welcome() {
+export default function Welcome({navigation}) {
   const [signUpModalVisible, setSignUpModalVisible] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
 
@@ -80,7 +83,7 @@ export default function welcome() {
         </TouchableHighlight>
       </View>
       <Text
-        onPress={() => window.alert("continue as guest pressed")}
+        onPress={() => navigation.navigate('Home')}
         style={[
           { fontSize: 11 },
           { textDecorationLine: "underline" },

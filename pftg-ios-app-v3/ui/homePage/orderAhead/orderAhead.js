@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableHighlight } from "react-native";
+import { View, Text, Image, TouchableHighlight, Dimensions } from "react-native";
 import React from "react";
 import styles from "./styles";
 import {
@@ -6,22 +6,46 @@ import {
   K2D_400Regular,
   K2D_600SemiBold,
 } from "@expo-google-fonts/k2d";
+import {
+  Montserrat_400Regular,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
+} from "@expo-google-fonts/montserrat";
+
+const { width } = Dimensions.get('window');
 
 export default function OrderAhead() {
   let [fontsLoaded] = useFonts({
     K2D_400Regular,
     K2D_600SemiBold,
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
   });
   if (!fontsLoaded) {
     return null;
   }
 
   return (
-    <View style={{ display: "flex", flexDirection: "row" }}>
+    <View
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        backgroundColor: "#E9ECE6",
+        width: {width},
+        height: 164
+      }}
+    >
       <View style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        <Text>Order Ahead</Text>
-        <Text>Pickup & Delivery</Text>
-        <Text>With Doordash</Text>
+        <Text style={{ fontFamily: "Montserrat_600SemiBold" }}>
+          Order Ahead
+        </Text>
+        <Text style={{ fontFamily: "Montserrat_700Bold" }}>
+          Pickup & Delivery
+        </Text>
+        <Text style={{ fontFamily: "Montserrat_400Regular" }}>
+          With Doordash
+        </Text>
       </View>
       <View>
         <Image source={require("../../../assets/doordashTitle.png")} />

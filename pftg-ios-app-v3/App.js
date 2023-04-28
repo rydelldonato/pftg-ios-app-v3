@@ -7,6 +7,7 @@ import GeneralFooter from "./ui/generalFooter/generalFooter";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from './pages/home-page/homePage';
+import OrderPage from "./pages/order-page/orderPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,15 +15,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Welcome"
           component={Welcome}
           options={{ title: "Welcome", headerShown:false}}
-        ></Stack.Screen> */}
+        ></Stack.Screen>
         <Stack.Screen
           name="Home"
           component={HomePage}
           options={{ title: "Home", headerShown:false}}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Order"
+          component={OrderPage}
+          options={{ title: "Order", headerShown:false}}
         ></Stack.Screen>
       </Stack.Navigator>
       {/* <SignUp/> */}

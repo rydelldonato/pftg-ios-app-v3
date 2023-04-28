@@ -1,4 +1,11 @@
-import { View, Text, Image, TouchableHighlight, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableHighlight,
+  Dimensions,
+} from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import React from "react";
 import styles from "./styles";
 import {
@@ -12,9 +19,15 @@ import {
   Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
+
+
 
 export default function OrderAhead() {
+  const navigation = useNavigation();
+  const handleOrderNowButton = () =>{
+    navigation.navigate("Order")
+  }
   let [fontsLoaded] = useFonts({
     K2D_400Regular,
     K2D_600SemiBold,
@@ -32,18 +45,40 @@ export default function OrderAhead() {
         display: "flex",
         flexDirection: "row",
         backgroundColor: "#E9ECE6",
-        width: {width},
-        height: 164
+        width: { width },
+        height: 164,
       }}
     >
-      <View style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        <Text style={{ fontFamily: "Montserrat_600SemiBold" }}>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          marginLeft: 23,
+          marginTop: 25,
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: "Montserrat_600SemiBold",
+            marginBottom: 3,
+            fontSize: 15,
+          }}
+        >
           Order Ahead
         </Text>
-        <Text style={{ fontFamily: "Montserrat_700Bold" }}>
+        <Text
+          style={{
+            fontFamily: "Montserrat_700Bold",
+            lineHeight: 21,
+            fontSize: 20,
+            width: 136,
+            marginBottom: 2,
+          }}
+        >
           Pickup & Delivery
         </Text>
-        <Text style={{ fontFamily: "Montserrat_400Regular" }}>
+        <Text style={{ fontFamily: "Montserrat_400Regular", fontSize: 13 }}>
           With Doordash
         </Text>
       </View>
@@ -62,6 +97,7 @@ export default function OrderAhead() {
       >
         <View style={{}}>
           <TouchableHighlight
+            onPress={handleOrderNowButton}
             style={{
               width: 154,
               height: 32,

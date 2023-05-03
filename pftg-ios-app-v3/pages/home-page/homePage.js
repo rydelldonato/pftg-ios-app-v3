@@ -5,6 +5,7 @@ import GeneralFooter from "../../ui/generalFooter/generalFooter";
 import GeneralHeader from "../../ui/generalHeader/generalHeader";
 import OrderAhead from "../../ui/homePage/orderAhead/orderAhead";
 import MenuWindow from "../../ui/homePage/menuWindow/menuWindow";
+import DealsWindow from "../../ui/homePage/DealsWindow/dealsWindow";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <GeneralHeader/>
       <OrderAhead/>
       <MenuWindow/>
+      <DealsWindow/>
       <GeneralFooter/>
     </View>
   );

@@ -1,6 +1,7 @@
 import styles from "./styles";
 import { View, Text, Image, ImageBackground, TouchableHighlight, Platform } from "react-native";
-import React from 'react'
+import React from 'react';
+import { useNavigation } from "@react-navigation/native";
 import {
     useFonts,
     Montserrat_400Regular,
@@ -9,6 +10,11 @@ import {
   } from "@expo-google-fonts/montserrat";
 
 export default function DealsWindow() {
+
+  const navigation = useNavigation();
+  const handleViewDealsButton = () => {
+    navigation.navigate("Deals");
+  };
     let [fontsLoaded] = useFonts({
         Montserrat_400Regular,
         Montserrat_600SemiBold,
@@ -103,7 +109,7 @@ export default function DealsWindow() {
               </View>
               <View style={{position: 'absolute',top: 100, left: 15}}>
                 <TouchableHighlight
-                  onPress={()=>window.alert('hello')}
+                  onPress={handleViewDealsButton}
                   style={{
                     width: 154,
                     height: 32,

@@ -8,6 +8,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from './pages/home-page/homePage';
 import OrderPage from "./pages/order-page/orderPage";
+import DealsPage from "./pages/deals-page/dealsPage";
+import MorePage from "./pages/more-page/morePage";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +31,16 @@ export default function App() {
           name="Order"
           component={OrderPage}
           options={{ title: "Order", headerShown:false}}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Deals"
+          component={DealsPage}
+          options={{ title: "Deals", headerShown:false}}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="More"
+          component={MorePage}
+          options={{ title: "More", headerShown:false}}
         ></Stack.Screen>
       </Stack.Navigator>
       {/* <SignUp/> */}

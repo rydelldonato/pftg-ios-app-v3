@@ -1,4 +1,5 @@
 import { View, Text, Image, ImageBackground, TouchableHighlight } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import styles from "./styles";
 import {
@@ -9,6 +10,11 @@ import {
 } from "@expo-google-fonts/montserrat";
 
 export default function MenuWindow() {
+
+  const navigation = useNavigation();
+  const handleOrderNowButton = () => {
+    navigation.navigate("Order");
+  };
   let [fontsLoaded] = useFonts({
     Montserrat_400Regular,
     Montserrat_600SemiBold,
@@ -94,7 +100,7 @@ export default function MenuWindow() {
           </View>
           <View style={{position: 'absolute',top: 100, left: 15}}>
             <TouchableHighlight
-              onPress={()=>window.alert('hello')}
+              onPress={handleOrderNowButton}
               style={{
                 width: 154,
                 height: 32,

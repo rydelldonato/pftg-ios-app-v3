@@ -96,7 +96,7 @@ export default function OrderAhead() {
         </View>
         <View style={{ marginTop: 29, marginRight: 14, alignItems: "center" }}>
           <Image source={require("../../../assets/doordashTitle.png")} />
-          <Image source={require("../../../assets/sisigFries.png")} />
+          <Image style={{width: '100%', height: '80%'}} source={require("../../../assets/sisigFries.png")} />
         </View>
         <View
           style={{

@@ -6,15 +6,24 @@ import {
   TouchableWithoutFeedback,
   TouchableHighlight,
   TextInput,
-  Image
+  FlatList,
+  Image,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import menuItems from "../../../backend/menuItems/menuItems";
 
 export default function searchPopUp(props) {
   const { searchModal, setSearchModal } = props;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
-
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    const filteredItems = menuItems.filter((item) =>
+      item.name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
 
   return (
     <View>
@@ -24,7 +33,7 @@ export default function searchPopUp(props) {
         transparent={true}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
-          setsearchModal = !searchModal;
+          setSearchModal = !searchModal;
         }}
         style={{ zIndex: 0 }}
       >
@@ -41,7 +50,7 @@ export default function searchPopUp(props) {
                 <Text style={[styles.exit, { fontSize: 16 }]}>X</Text>
               </TouchableHighlight>
             </TouchableWithoutFeedback>
-            {/* <TextInput
+            <TextInput
               style={[
                 styles.modalText,
                 {
@@ -50,14 +59,21 @@ export default function searchPopUp(props) {
                   fontSize: 15,
                 },
               ]}
+              onChangeText={handleSearch}
+              value={searchQuery}
               placeholder="Search our menu"
-              placeholderTextColor='black'
-            ></TextInput> */}
-            <View style={{width: '100%', alignItems: 'center'}}>
-            <Text>{menuItems[0].name}</Text>
-            <Text>{menuItems[0].price}</Text>
-            <Image style={styles.image} source={menuItems[8].image}/>
-            </View>
+              placeholderTextColor="black"
+            ></TextInput>
+            <FlatList
+              data={filteredData}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View>
+                  <Image source={item.image} />
+                  <Text style={styles.menuItem}>{item.name}</Text>
+                </View>
+              )}
+            />
           </View>
         </View>
       </Modal>

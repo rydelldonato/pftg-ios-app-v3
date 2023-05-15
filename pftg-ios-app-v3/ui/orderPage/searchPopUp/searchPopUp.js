@@ -6,8 +6,10 @@ import {
   TouchableWithoutFeedback,
   TouchableHighlight,
   TextInput,
+  Image
 } from "react-native";
 import React from "react";
+import menuItems from "../../../backend/menuItems/menuItems";
 
 export default function searchPopUp(props) {
   const { searchModal, setSearchModal } = props;
@@ -39,7 +41,7 @@ export default function searchPopUp(props) {
                 <Text style={[styles.exit, { fontSize: 16 }]}>X</Text>
               </TouchableHighlight>
             </TouchableWithoutFeedback>
-            <TextInput
+            {/* <TextInput
               style={[
                 styles.modalText,
                 {
@@ -50,7 +52,12 @@ export default function searchPopUp(props) {
               ]}
               placeholder="Search our menu"
               placeholderTextColor='black'
-            ></TextInput>
+            ></TextInput> */}
+            <View style={{width: '100%', alignItems: 'center'}}>
+            <Text>{menuItems[0].name}</Text>
+            <Text>{menuItems[0].price}</Text>
+            <Image style={styles.image} source={menuItems[8].image}/>
+            </View>
           </View>
         </View>
       </Modal>

@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 160,
         bottom: 4
+      },
+      image:{
+        width: '100%',
+        height: '100%',
       }
 })
 

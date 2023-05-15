@@ -1,15 +1,17 @@
 import styles from "./styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   useFonts,
   Montserrat_400Regular,
   Montserrat_600SemiBold,
   Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
+import SearchPopUp from "../searchPopUp/searchPopUp";
 
 export default function header() {
-    
+  const [searchModal, setSearchModal] = useState(false);
+
   let [fontsLoaded] = useFonts({
     Montserrat_400Regular,
     Montserrat_600SemiBold,
@@ -33,9 +35,14 @@ export default function header() {
         <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 24 }}>
           Order
         </Text>
+        <SearchPopUp searchModal={searchModal} setSearchModal={setSearchModal} />
       </View>
       <View>
-        <TouchableOpacity onPress={()=>{handleSearchButton}}>
+        <TouchableOpacity
+          onPress={() => {
+            setSearchModal(!searchModal);
+          }}
+        >
           <Image
             style={{ width: 20, height: 20 }}
             source={require("../../../assets/search.png")}

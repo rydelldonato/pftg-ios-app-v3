@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         textAlign: "center"
       },
       modalText: {
+        marginTop: 10,
         marginBottom: 15,
         textAlign: "center"
       },
@@ -49,10 +50,11 @@ const styles = StyleSheet.create({
         padding: 10,
       },
       exit:{
-        color: "black",
         position: "absolute",
-        right: 160,
-        bottom: 4
+        right: 155,
+        bottom: 2,
+        width: 20,
+        height: 20,
       },
       image:{
         width: '100%',

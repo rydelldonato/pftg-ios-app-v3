@@ -11,11 +11,14 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import menuItems from "../../../backend/menuItems/menuItems";
+import ResultsPage from "../resultsPage/resultsPage";
 
 export default function searchPopUp(props) {
   const { searchModal, setSearchModal } = props;
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [resultPage, setResultPage] = useState(false);
+  const [expandedModal, setExpandedModal] = useState(false);
 
   const handleSearch = (text) => {
     setSearchQuery(text);
@@ -24,9 +27,13 @@ export default function searchPopUp(props) {
     );
     setFilteredData(filteredItems);
   };
+  const handleReturnPress = () => {
+    //when the return button is pressed I want expand the pop up window to reveal the query results underneath the search bar
+    setExpandedModal(!expandedModal);
+  };
 
   return (
-    <View style={{backgroundColor: '#82B77D'}}>
+    <View style={{ backgroundColor: "#82B77D" }}>
       <Modal
         visible={searchModal}
         animationType="slide"
@@ -35,17 +42,24 @@ export default function searchPopUp(props) {
           Alert.alert("Modal has been closed.");
           setSearchModal = !searchModal;
         }}
-        style={{ zIndex: 0, backgroundColor: '#82B77D' }}
+        style={{ zIndex: 0, backgroundColor: "#82B77D" }}
       >
+        <ResultsPage modalVisible={resultPage} />
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View
+            style={[
+              styles.modalView,
+              { height: expandedModal ? "90%" : "50%" },
+            ]}
+          >
             <TouchableHighlight onPress={() => setSearchModal(!searchModal)}>
-            <Image 
-            source={require('../../../assets/close.png')}
-              style={[styles.exit]} 
-            />
+              <Image
+                source={require("../../../assets/close.png")}
+                style={[styles.exit]}
+              />
             </TouchableHighlight>
             <TextInput
+              onSubmitEditing={handleReturnPress}
               style={[
                 styles.modalText,
                 {
@@ -62,7 +76,8 @@ export default function searchPopUp(props) {
               placeholder="Search our menu"
               placeholderTextColor="black"
             ></TextInput>
-            <FlatList
+            {expandedModal && <FlatList
+              style={{ height: "100%" }}
               data={filteredData}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
@@ -71,7 +86,7 @@ export default function searchPopUp(props) {
                   <Text style={styles.menuItem}>{item.name}</Text>
                 </View>
               )}
-            />
+            />}
           </View>
         </View>
       </Modal>

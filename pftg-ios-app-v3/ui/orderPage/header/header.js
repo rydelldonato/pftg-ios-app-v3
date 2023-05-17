@@ -29,6 +29,7 @@ export default function header() {
         marginTop: 64,
         marginLeft: 22,
         marginRight: 31,
+        backgroundColor: '#82B77D'
       }}
     >
       <View>

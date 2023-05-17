@@ -26,7 +26,7 @@ export default function searchPopUp(props) {
   };
 
   return (
-    <View>
+    <View style={{backgroundColor: '#82B77D'}}>
       <Modal
         visible={searchModal}
         animationType="slide"
@@ -35,14 +35,14 @@ export default function searchPopUp(props) {
           Alert.alert("Modal has been closed.");
           setSearchModal = !searchModal;
         }}
-        style={{ zIndex: 0 }}
+        style={{ zIndex: 0, backgroundColor: '#82B77D' }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <TouchableHighlight onPress={() => setSearchModal(!searchModal)}>
             <Image 
             source={require('../../../assets/close.png')}
-              style={[styles.exit]}
+              style={[styles.exit]} 
             />
             </TouchableHighlight>
             <TextInput

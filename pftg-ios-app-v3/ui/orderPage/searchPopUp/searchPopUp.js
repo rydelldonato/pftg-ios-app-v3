@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import menuItems from "../../../backend/menuItems/menuItems";
-import ResultsPage from "../resultsPage/resultsPage";
+// import ResultsPage from "../resultsPage/resultsPage";
 
 export default function searchPopUp(props) {
   const { searchModal, setSearchModal } = props;
@@ -44,12 +44,12 @@ export default function searchPopUp(props) {
         }}
         style={{ zIndex: 0, backgroundColor: "#82B77D" }}
       >
-        <ResultsPage modalVisible={resultPage} />
+        {/* <ResultsPage modalVisible={resultPage} /> */}
         <View style={styles.centeredView}>
           <View
             style={[
               styles.modalView,
-              { height: expandedModal ? "90%" : "50%" },
+              { height: expandedModal ? "90%" : "20%" },
             ]}
           >
             <TouchableHighlight onPress={() => setSearchModal(!searchModal)}>
@@ -76,17 +76,48 @@ export default function searchPopUp(props) {
               placeholder="Search our menu"
               placeholderTextColor="black"
             ></TextInput>
-            {expandedModal && <FlatList
-              style={{ height: "100%" }}
-              data={filteredData}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <View>
-                  <Image source={item.image} />
-                  <Text style={styles.menuItem}>{item.name}</Text>
-                </View>
-              )}
-            />}
+            {expandedModal && (
+              <FlatList
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  borderWidth: 3,
+                  borderColor: "#F2F2F2",
+                }}
+                data={filteredData}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={{ justifyContent: "center" }}
+                renderItem={({ item }) => (
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: "row",
+                      alignContent: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <View style={{ flex: 1, aspectRatio: 1, alignItems: 'center' }}>
+                      <Image
+                        style={{
+                          height: "90%",
+                          width: "70%",
+                          alignItems: "center",
+                        }}
+                        source={item.image}
+                      />
+                      <Text
+                        style={[
+                          styles.menuItem,
+                          { height: "10%", width: "100%", textAlign: "center" },
+                        ]}
+                      >
+                        {item.name}
+                      </Text>
+                    </View>
+                  </View>
+                )}
+              />
+            )}
           </View>
         </View>
       </Modal>

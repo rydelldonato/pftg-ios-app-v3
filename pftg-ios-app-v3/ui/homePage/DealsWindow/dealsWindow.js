@@ -104,8 +104,8 @@ export default function DealsWindow() {
                   On everything you love
                 </Text>
               </View>
-              <View style={{marginTop: 36, position: 'absolute', left:245}}>
-                <Image source={require("../../../assets/combo1.png")} />
+              <View style={{marginTop: 46}}>
+                <Image style={{width:150, height: 100}} source={require("../../../assets/combo1.png")} />
               </View>
               <View style={{position: 'absolute',top: 100, left: 15}}>
                 <TouchableHighlight

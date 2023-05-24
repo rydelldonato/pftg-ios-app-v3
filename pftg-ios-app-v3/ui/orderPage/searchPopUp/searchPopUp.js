@@ -79,10 +79,11 @@ export default function searchPopUp(props) {
             {expandedModal && (
               <FlatList
                 style={{
-                  height: "100%",
+                  height: '100%',
                   width: "100%",
                   borderWidth: 3,
                   borderColor: "#F2F2F2",
+                  paddingBottom: 40
                 }}
                 data={filteredData}
                 keyExtractor={(item, index) => index.toString()}
@@ -94,14 +95,24 @@ export default function searchPopUp(props) {
                       flexDirection: "row",
                       alignContent: "center",
                       justifyContent: "center",
+                      height: 320
                     }}
                   >
-                    <View style={{ flex: 1, aspectRatio: 1, alignItems: 'center' }}>
+                    <View style={{ flex: 1, aspectRatio: 1, alignItems: 'center', margin: 20,shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 4,
+                    },
+                    shadowOpacity: 0.35,
+                    shadowRadius: 3.84,
+                    elevation: 5, }}>
                       <Image
                         style={{
                           height: "90%",
                           width: "70%",
                           alignItems: "center",
+                          marginBottom: 10,
+                          marginTop: 5,
                         }}
                         source={item.image}
                       />
@@ -112,6 +123,14 @@ export default function searchPopUp(props) {
                         ]}
                       >
                         {item.name}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.menuItem,
+                          { height: "10%", width: "100%", textAlign: "center" },
+                        ]}
+                      >
+                        {item.price}
                       </Text>
                     </View>
                   </View>

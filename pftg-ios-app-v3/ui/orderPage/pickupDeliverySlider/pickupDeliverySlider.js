@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   buttonSelected: {
-    backgroundColor: "green",
+    backgroundColor: "#FAEDCD",
   },
   buttonNotSelected: {
     backgroundColor: "white",

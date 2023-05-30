@@ -5,15 +5,36 @@ import {
   StyleSheet,
   StatusBar,
   Image,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import { useNavigation } from '@react-navigation/native';
+import {
+  useFonts,
+  K2D_400Regular,
+  K2D_600SemiBold,
+} from "@expo-google-fonts/k2d";
+import { Montserrat_700Bold } from "@expo-google-fonts/montserrat";
+import React, {useState} from "react";
+import SisigCategory from './sisigCategory/sisigCategory'
 
 export default function menu() {
+  const navigation = useNavigation();
+  const [showComponent1, setShowComponent1] = useState(false);
+  let [fontsLoaded] = useFonts({
+    Montserrat_700Bold,
+    K2D_400Regular,
+    K2D_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   const DATA = [
     {
       id: "Deals",
       title: "Deals",
       image: require("../../../assets/logo.png"),
+      //I want a specific modal to pop up based on the category pressed
+      //
     },
     {
       id: "Sisig",
@@ -47,40 +68,81 @@ export default function menu() {
     },
   ];
 
-  const Item = ({ title, image }) => (
-    <View>
-      <View style={[styles.item, { display: "flex", flexDirection: "row" }]}>
-        <Image style={{ width: 45, height: 48 }} source={image} />
-        <Text style={styles.title}>{title}</Text>
-        <Image source={require("../../../assets/moreThan.png")} />
+  const Item = ({ title, image, onPress }) => (
+    <TouchableOpacity onPress={onPress}>
+      <View>
+        <View
+          style={[
+            styles.item,
+            {
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            },
+          ]}
+        >
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Image
+              style={{ width: 50, height: 53, marginLeft: 22, marginRight: 18 }}
+              source={image}
+            />
+            <Text
+              style={[
+                styles.title,
+                { fontFamily: "Montserrat_700Bold", marginTop: 12 },
+              ]}
+            >
+              {title}
+            </Text>
+          </View>
+          <View style={{ marginTop: 12 }}>
+            <Image
+              style={{ marginRight: 31 }}
+              source={require("../../../assets/moreThan.png")}
+            />
+          </View>
+        </View>
+        <View
+          style={{
+            height: 10,
+            width: 390,
+            borderBottomColor: "black",
+            borderBottomWidth: 1,
+            marginVertical: 10,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.35,
+            shadowRadius: 3.84,
+            elevation: 5,
+          }}
+        ></View>
       </View>
-      <View
-        style={{
-          height: 10,
-          width: 370,
-          borderBottomColor: "black",
-          borderBottomWidth: 1,
-          marginVertical: 10,
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 4,
-          },
-          shadowOpacity: 0.35,
-          shadowRadius: 3.84,
-          elevation: 5,
-        }}
-      ></View>
-    </View>
+    </TouchableOpacity>
   );
+
+  const handleItemPress = (item) => {
+    // Perform the desired action based on the pressed item
+    // You can navigate to another screen using a navigation library like React Navigation
+    setShowComponent1(!showComponent1);
+  };
   return (
     <View>
-      <Text>Explore our menu</Text>
+      {/* <SisigCategory modalVisible={showComponent1} setModalVisible={setShowComponent1} /> */}
+      <Text style={{ fontFamily: "K2D_600SemiBold", margin: 22 }}>
+        Explore our menu
+      </Text>
       <FlatList
         style={{ height: 480 }}
         data={DATA}
         renderItem={({ item }) => (
-          <Item title={item.title} image={item.image} />
+          <Item
+            title={item.title}
+            image={item.image}
+            onPress={() => handleItemPress(item)}
+          />
         )}
         keyExtractor={(item) => item.id}
       />
@@ -100,6 +162,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   title: {
-    fontSize: 32,
+    fontSize: 22,
   },
 });

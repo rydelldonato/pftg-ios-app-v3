@@ -7,19 +7,18 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import {
   useFonts,
   K2D_400Regular,
   K2D_600SemiBold,
 } from "@expo-google-fonts/k2d";
 import { Montserrat_700Bold } from "@expo-google-fonts/montserrat";
-import React, {useState} from "react";
-import SisigCategory from './sisigCategory/sisigCategory'
+import React, { useState } from "react";
+import Sisig from "../../../pages/menu-categories/sisig/sisig";
 
 export default function menu() {
   const navigation = useNavigation();
-  const [showComponent1, setShowComponent1] = useState(false);
   let [fontsLoaded] = useFonts({
     Montserrat_700Bold,
     K2D_400Regular,
@@ -126,7 +125,7 @@ export default function menu() {
   const handleItemPress = (item) => {
     // Perform the desired action based on the pressed item
     // You can navigate to another screen using a navigation library like React Navigation
-    setShowComponent1(!showComponent1);
+    navigation.navigate(item.id);
   };
   return (
     <View>

@@ -1,13 +1,25 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import {
+    useFonts,
+    K2D_400Regular,
+    K2D_600SemiBold,
+  } from "@expo-google-fonts/k2d";
 
 export default function header() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+  let [fontsLoaded] = useFonts({
+    K2D_400Regular,
+    K2D_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
-    const goBack = () => {
-        navigation.goBack();
-      };
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   return (
     <View>
@@ -48,6 +60,17 @@ export default function header() {
           elevation: 5,
         }}
       ></View>
+      <View style={{ display: "flex", marginTop: 11, marginLeft: 14  }}>
+        <View>
+          <Text style={{ fontSize: 14, fontFamily: 'K2D_600SemiBold' }}>Treat Yourself Today</Text>
+        </View>
+        <View>
+          <Text style={{ fontSize: 11, fontFamily: 'K2D_400Regular' }}>
+            Enjoy the traditional taste of Filipino food in fusion with dishes
+            you love.
+          </Text>
+        </View>
+      </View>
     </View>
   );
 }

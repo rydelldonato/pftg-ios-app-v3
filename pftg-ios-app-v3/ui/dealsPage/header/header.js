@@ -60,7 +60,7 @@ export default function header() {
           elevation: 5,
         }}
       ></View>
-      <View style={{ display: "flex", marginTop: 11, marginLeft: 14  }}>
+      <View style={{ display: "flex", marginTop: 14, marginLeft: 14  }}>
         <View>
           <Text style={{ fontSize: 14, fontFamily: 'K2D_600SemiBold' }}>Treat Yourself Today</Text>
         </View>

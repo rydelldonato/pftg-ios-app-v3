@@ -1,10 +1,17 @@
-import { View, Text, TouchableOpacity, Image, Dimensions, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  FlatList,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import SearchPopUp from "../orderPage/searchPopUp/searchPopUp";
 import menuItems from "../../backend/menuItems/menuItems";
 import styles from "./styles";
-import GeneralFooter from '../generalFooter/generalFooter'
+import GeneralFooter from "../generalFooter/generalFooter";
 
 const { width } = Dimensions.get("window");
 const middleX = width / 2;
@@ -17,6 +24,7 @@ export default function categoryLayout(props) {
   const navigation = useNavigation();
 
   const handleSearch = (category) => {
+    category === "Dessert" ? (category = "Banana") : (category = category);
     setSearchQuery(category);
     const filteredItems = menuItems.filter((item) =>
       item.name.toLowerCase().includes(category.toLowerCase())

@@ -16,9 +16,11 @@ import {
 import { Montserrat_700Bold } from "@expo-google-fonts/montserrat";
 import React, { useState } from "react";
 import Sisig from "../../../pages/menu-categories/sisig/sisig";
+import categoryLayout from "../../menuCategories/categoryLayout";
 
 export default function menu() {
   const navigation = useNavigation();
+  const [category, setCategory] = useState('')
   let [fontsLoaded] = useFonts({
     Montserrat_700Bold,
     K2D_400Regular,
@@ -123,8 +125,11 @@ export default function menu() {
   );
 
   const handleItemPress = (item) => {
-    // Perform the desired action based on the pressed item
-    // You can navigate to another screen using a navigation library like React Navigation
+    // category is pressed
+    // we navigate to the category's page
+    // we set a prop in the category layout component to change based off of the category pressed
+    // we need to use the same search function from our search component
+      // pass down the category name to as a prop to the searchPopUp
     navigation.navigate(item.id);
   };
   return (

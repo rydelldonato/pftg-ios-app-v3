@@ -5,7 +5,7 @@ import CategoryLayout from '../../../ui/menuCategories/categoryLayout'
 export default function Sisig() {
   return (
     <View style={{backgroundColor: '#82B77D', height: '100%'}}>
-      <CategoryLayout/>
+      <CategoryLayout category={'Sisig'}/>
     </View>
   )
 }

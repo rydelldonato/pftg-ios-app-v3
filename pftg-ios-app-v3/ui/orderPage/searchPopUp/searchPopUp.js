@@ -14,7 +14,7 @@ import menuItems from "../../../backend/menuItems/menuItems";
 // import ResultsPage from "../resultsPage/resultsPage";
 
 export default function searchPopUp(props) {
-  const { searchModal, setSearchModal } = props;
+  const { searchModal, setSearchModal, category } = props;
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [resultPage, setResultPage] = useState(false);

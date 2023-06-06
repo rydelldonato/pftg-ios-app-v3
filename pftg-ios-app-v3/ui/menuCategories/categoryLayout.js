@@ -1,19 +1,84 @@
-import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
-import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Image, Dimensions, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import SearchPopUp from "../orderPage/searchPopUp/searchPopUp";
+import menuItems from "../../backend/menuItems/menuItems";
+import styles from "./styles";
+import GeneralFooter from '../generalFooter/generalFooter'
 
 const { width } = Dimensions.get("window");
 const middleX = width / 2;
 
-export default function categoryLayout() {
+export default function categoryLayout(props) {
+  const { category } = props;
   const [searchModal, setSearchModal] = useState(false);
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const navigation = useNavigation();
+
+  const handleSearch = (category) => {
+    setSearchQuery(category);
+    const filteredItems = menuItems.filter((item) =>
+      item.name.toLowerCase().includes(category.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
+
+  useEffect(() => {
+    handleSearch(category);
+    // Perform actions when the component is initially loaded
+    // For example, make an API call, fetch data, etc.
+  }, []);
 
   const goBack = () => {
     navigation.goBack();
   };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={{
+        flex: 1,
+        aspectRatio: 0.5, // Two items in each row
+        alignItems: "center",
+        margin: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        shadowOpacity: 0.35,
+        shadowRadius: 3.84,
+        elevation: 5,
+      }}
+      onPress={() => console.log("Item pressed:", item.name)}
+    >
+      <Image
+        style={{
+          height: "70%",
+          width: "70%",
+          marginBottom: 10,
+          marginTop: 5,
+        }}
+        source={item.image}
+      />
+      <Text
+        style={[
+          styles.menuItem,
+          { height: "15%", width: "100%", textAlign: "center" },
+        ]}
+      >
+        {item.name}
+      </Text>
+      <Text
+        style={[
+          styles.menuItem,
+          { height: "15%", width: "100%", textAlign: "center" },
+        ]}
+      >
+        {item.price}
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View>
@@ -40,11 +105,11 @@ export default function categoryLayout() {
               justifyContent: "center",
               width: "100%",
               paddingHorizontal: middleX - 50,
-              paddingTop: 15
+              paddingTop: 15,
             }}
           >
-            <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 14 }}>
-              Order
+            <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 13 }}>
+              {category}
             </Text>
           </View>
           <SearchPopUp
@@ -54,7 +119,7 @@ export default function categoryLayout() {
         </View>
         <View>
           <TouchableOpacity
-          style={{paddingTop: 10}}
+            style={{ paddingTop: 10 }}
             onPress={() => {
               setSearchModal(!searchModal);
             }}
@@ -81,6 +146,22 @@ export default function categoryLayout() {
           elevation: 5,
         }}
       ></View>
+      <View style={{ height: "80%" }}>
+        <FlatList
+          style={{
+            flex: 1,
+            width: "100%",
+            borderColor: "#F2F2F2",
+            paddingBottom: 40,
+          }}
+          data={filteredData}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{ justifyContent: "center" }}
+          numColumns={2} // Display two items in each row
+          renderItem={renderItem}
+        />
+      </View>
+      <GeneralFooter />
     </View>
   );
 }

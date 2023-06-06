@@ -10,7 +10,7 @@ export default menuItems = [
     name: "Shanghai Lumpia (10pcs)",
     description:
       "Traditionally made of ground pork with minced onions, finely chopped carrots and garlic, cilantro and seasonings rolled up in a paper thin egg roll wrapper.",
-    image: require("../../assets/shanghaiLumpia.png"),
+    image: require("../../assets/lumpia.png"),
     price: "$7.99",
   },
   {

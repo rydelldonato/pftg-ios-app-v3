@@ -21,6 +21,12 @@ export default function categoryLayout(props) {
     const filteredItems = menuItems.filter((item) =>
       item.name.toLowerCase().includes(category.toLowerCase())
     );
+
+    // Add an empty item if the number of items is odd
+    if (filteredItems.length % 2 !== 0) {
+      filteredItems.push({}); // Add an empty item
+    }
+
     setFilteredData(filteredItems);
   };
 
@@ -34,51 +40,58 @@ export default function categoryLayout(props) {
     navigation.goBack();
   };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={{
-        flex: 1,
-        aspectRatio: 0.5, // Two items in each row
-        alignItems: "center",
-        margin: 5,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 4,
-        },
-        shadowOpacity: 0.35,
-        shadowRadius: 3.84,
-        elevation: 5,
-      }}
-      onPress={() => console.log("Item pressed:", item.name)}
-    >
-      <Image
+  const renderItem = ({ item }) => {
+    if (!item.hasOwnProperty("name")) {
+      // Render an empty item
+      return <View style={{ flex: 1, aspectRatio: 0.5, margin: 5 }} />;
+    }
+
+    return (
+      <TouchableOpacity
         style={{
-          height: "70%",
-          width: "70%",
-          marginBottom: 10,
-          marginTop: 5,
+          flex: 1,
+          aspectRatio: 0.5, // Two items in each row
+          alignItems: "center",
+          margin: 5,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.35,
+          shadowRadius: 3.84,
+          elevation: 5,
         }}
-        source={item.image}
-      />
-      <Text
-        style={[
-          styles.menuItem,
-          { height: "15%", width: "100%", textAlign: "center" },
-        ]}
+        onPress={() => console.log("Item pressed:", item.name)}
       >
-        {item.name}
-      </Text>
-      <Text
-        style={[
-          styles.menuItem,
-          { height: "15%", width: "100%", textAlign: "center" },
-        ]}
-      >
-        {item.price}
-      </Text>
-    </TouchableOpacity>
-  );
+        <Image
+          style={{
+            height: "70%",
+            width: "70%",
+            marginBottom: 10,
+            marginTop: 5,
+          }}
+          source={item.image}
+        />
+        <Text
+          style={[
+            styles.menuItem,
+            { height: "15%", width: "100%", textAlign: "center" },
+          ]}
+        >
+          {item.name}
+        </Text>
+        <Text
+          style={[
+            styles.menuItem,
+            { height: "15%", width: "100%", textAlign: "center" },
+          ]}
+        >
+          {item.price}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View>
@@ -108,7 +121,7 @@ export default function categoryLayout(props) {
               paddingTop: 15,
             }}
           >
-            <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 13 }}>
+            <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 11 }}>
               {category}
             </Text>
           </View>

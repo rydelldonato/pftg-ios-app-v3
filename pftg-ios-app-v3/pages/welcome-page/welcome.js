@@ -85,7 +85,7 @@ export default function Welcome({navigation}) {
       <Text
         onPress={() => navigation.navigate('Home')}
         style={[
-          { fontSize: 11 },
+          { fontSize: 16 },
           { textDecorationLine: "underline" },
           { fontFamily: "K2D_400Regular" },
         ]}

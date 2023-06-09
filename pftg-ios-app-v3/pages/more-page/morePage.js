@@ -4,7 +4,7 @@ import React from "react";
 import GeneralHeader from "../../ui/generalHeader/generalHeader";
 import GeneralFooter from "../../ui/generalFooter/generalFooter";
 
-export default function MorePage() {
+export default function MorePage({navigation}) {
 
   const DATA = [
     {
@@ -91,6 +91,8 @@ export default function MorePage() {
       </View>
     </TouchableOpacity>
   );
+
+
   return (
     <View style={{ backgroundColor: "#82B77D", height: "100%" }}>
       <GeneralHeader />
@@ -101,7 +103,7 @@ export default function MorePage() {
           <Item
             title={item.title}
             image={item.image}
-            onPress={() => handleItemPress(item)}
+            onPress={() => navigation.navigate(item.title)}
           />
         )}
         keyExtractor={(item) => item.id}

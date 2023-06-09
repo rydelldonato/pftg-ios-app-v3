@@ -16,6 +16,7 @@ import Lumpia from "./pages/menu-categories/lumpia/lumpia";
 import PeachysCombo from "./pages/menu-categories/peachysCombo/peachysCombo";
 import Dessert from "./pages/menu-categories/dessert/dessert";
 import Beverages from "./pages/menu-categories/beverages/beverages";
+import Locations from "./pages/locations-page/locations";
 
 const Stack = createNativeStackNavigator();
 
@@ -77,6 +78,11 @@ export default function App() {
           name="More"
           component={MorePage}
           options={{ title: "More", headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Locations"
+          component={Locations}
+          options={{ title: "Locations", headerShown: false }}
         ></Stack.Screen>
       </Stack.Navigator>
       {/* <SignUp/> */}

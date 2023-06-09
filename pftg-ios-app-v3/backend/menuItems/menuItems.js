@@ -66,4 +66,16 @@ export default menuItems = [
     image: require("../../assets/sisigBao.png"),
     price: "$9.99",
   },
+  {
+    name: "Pepsi",
+    description:
+      "Pepsi",
+    price: "$2.50",
+  },
+  {
+    name: "Bottled Water",
+    description:
+      "Bottled Water",
+    price: "$1.99",
+  },
 ];

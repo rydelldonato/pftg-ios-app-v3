@@ -25,6 +25,7 @@ export default function categoryLayout(props) {
 
   const handleSearch = (category) => {
     category === "Dessert" ? (category = "Banana") : (category = category);
+    category === "Beverages" ? (category = "Pepsi") : (category = category);
     setSearchQuery(category);
     const filteredItems = menuItems.filter((item) =>
       item.name.toLowerCase().includes(category.toLowerCase())

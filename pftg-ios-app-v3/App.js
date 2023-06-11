@@ -17,6 +17,7 @@ import PeachysCombo from "./pages/menu-categories/peachysCombo/peachysCombo";
 import Dessert from "./pages/menu-categories/dessert/dessert";
 import Beverages from "./pages/menu-categories/beverages/beverages";
 import Locations from "./pages/locations-page/locations";
+import ContactPage from "./pages/contact-page/contactPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -83,6 +84,11 @@ export default function App() {
           name="Locations"
           component={Locations}
           options={{ title: "Locations", headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Contact"
+          component={ContactPage}
+          options={{ title: "Contact", headerShown: false }}
         ></Stack.Screen>
       </Stack.Navigator>
       {/* <SignUp/> */}

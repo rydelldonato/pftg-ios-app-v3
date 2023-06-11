@@ -1,11 +1,10 @@
 import styles from "./styles";
-import { View, Text, FlatList, TouchableOpacity,Image } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import GeneralHeader from "../../ui/generalHeader/generalHeader";
 import GeneralFooter from "../../ui/generalFooter/generalFooter";
 
-export default function MorePage({navigation}) {
-
+export default function MorePage({ navigation }) {
   const DATA = [
     {
       id: "Profile",
@@ -39,7 +38,7 @@ export default function MorePage({navigation}) {
 
   const Item = ({ title, image, onPress }) => (
     <TouchableOpacity onPress={onPress}>
-      <View style={{height: 75}}>
+      <View style={{ height: 75 }}>
         <View
           style={[
             styles.item,
@@ -58,7 +57,11 @@ export default function MorePage({navigation}) {
             <Text
               style={[
                 styles.title,
-                { fontFamily: "Montserrat_700Bold", marginTop: 12, opacity: .5 },
+                {
+                  fontFamily: "Montserrat_700Bold",
+                  marginTop: 12,
+                  opacity: 0.5,
+                },
               ]}
             >
               {title}
@@ -66,7 +69,7 @@ export default function MorePage({navigation}) {
           </View>
           <View style={{ marginTop: 12 }}>
             <Image
-              style={{ marginRight: 31, opacity: .5 }}
+              style={{ marginRight: 31, opacity: 0.5 }}
               source={require("../../assets/moreThan.png")}
             />
           </View>
@@ -91,7 +94,6 @@ export default function MorePage({navigation}) {
       </View>
     </TouchableOpacity>
   );
-
 
   return (
     <View style={{ backgroundColor: "#82B77D", height: "100%" }}>

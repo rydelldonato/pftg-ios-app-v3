@@ -7,25 +7,60 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
 import TermsPopUp from "../termsPopUp/termsPopUp";
+import { initializeApp } from 'firebase/app';
+import "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function signUp(props) {
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnMUbQpsCU7gnxfp7OSGrB8xJM58mizpw",
+    authDomain: "peachy-s-food-to-go-app.firebaseapp.com",
+    databaseURL: "https://peachy-s-food-to-go-app-default-rtdb.firebaseio.com",
+    projectId: "peachy-s-food-to-go-app",
+    storageBucket: "peachy-s-food-to-go-app.appspot.com",
+    messagingSenderId: "1079556604883",
+    appId: "1:1079556604883:web:58b44aa27f50cf00d5e526"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+
   const { modalVisible, setModalVisible } = props;
 
   const [termsModal, setTermsModal] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const auth = getAuth();
 
   const handleSubmit = () => {
-    // Do something with the username and password
-    setModalVisible(!modalVisible);
-    setEmail("");
-    setPassword("");
-    window.alert(`Email: ${email}, Password: ${password}`);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // User creation successful
+        const user = userCredential.user;
+        console.log("User created:", user.uid);
+
+        setModalVisible(!modalVisible);
+        setEmail("");
+        setPassword("");
+        window.alert(`Email: ${email}, Password: ${password}`);
+      })
+      .catch((error) => {
+        // User creation failed
+        console.error("User creation error:", error);
+        let errorMessage = "An error occurred";
+        if (error.code === "auth/weak-password") {
+          errorMessage = "Password should be at least 6 characters";
+        }
+        window.alert(errorMessage);
+      });
   };
 
   const handleTermsLink = () => {
@@ -45,7 +80,7 @@ export default function signUp(props) {
         visible={modalVisible}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
-          setModalVisible = !modalVisible;
+          setModalVisible(!modalVisible);
         }}
         style={{ zIndex: 0 }}
       >

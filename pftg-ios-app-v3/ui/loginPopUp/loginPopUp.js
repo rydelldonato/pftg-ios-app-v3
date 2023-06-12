@@ -8,11 +8,30 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import styles from "./styles";
 import SignUp from "../welcomePage/signUpPopUp/signUp";
 import ForgotPassword from "../forgotPassword/forgotPassword";
+import { initializeApp } from 'firebase/app';
+import "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function loginPopUp(props) {
+  const navigation = useNavigation();
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnMUbQpsCU7gnxfp7OSGrB8xJM58mizpw",
+    authDomain: "peachy-s-food-to-go-app.firebaseapp.com",
+    databaseURL: "https://peachy-s-food-to-go-app-default-rtdb.firebaseio.com",
+    projectId: "peachy-s-food-to-go-app",
+    storageBucket: "peachy-s-food-to-go-app.appspot.com",
+    messagingSenderId: "1079556604883",
+    appId: "1:1079556604883:web:58b44aa27f50cf00d5e526"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
   const { modalVisible, setModalVisible } = props;
 
   const [email, setEmail] = useState("");
@@ -20,12 +39,31 @@ export default function loginPopUp(props) {
   const [signUpPopUp, setsignUpPopUp] = useState(false);
   const [forgotPasswordPopUp, setForgotPasswordPopUp] = useState(false)
 
+  // const auth = getAuth();
+
+
   const handleSubmit = () => {
     // Do something with the username and password
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    navigation.navigate('Home')
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    let errorMessage = "An error occurred"
+    if (errorCode === "auth/wrong-password") {
+      errorMessage = "Wrong password";
+    }
+    console.log(error)
+    window.alert(errorMessage)
+  });
+
     setModalVisible(!modalVisible);
     setEmail("");
     setPassword("");
-    window.alert(`Email: ${email}, Password: ${password}`);
   };
 
   return (

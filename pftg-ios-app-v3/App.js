@@ -20,6 +20,7 @@ import Locations from "./pages/locations-page/locations";
 import ContactPage from "./pages/contact-page/contactPage";
 import Profile from "./pages/profile-page/profile";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

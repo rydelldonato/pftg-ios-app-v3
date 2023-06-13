@@ -96,8 +96,7 @@ export default function MorePage({ navigation }) {
   );
 
   return (
-    <View style={{ backgroundColor: "#82B77D", height: "100%" }}>
-      <GeneralHeader />
+    <View style={{ backgroundColor: "#82B77D", height: "100%", paddingTop: 80 }}>
       <FlatList
         style={{ height: 480 }}
         data={DATA}

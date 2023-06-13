@@ -40,7 +40,7 @@ export default function GeneralHeader() {
         source={require("../../assets/logo.png")}
       />
       <Text style={{ fontFamily: "Montserrat_700Bold" }}>
-        Welcome {currentUser === null?'Guest':currentUser.displayName} 👋🏽
+        Welcome {currentUser === null ? "Guest" : currentUser.displayName} 👋🏽
       </Text>
     </View>
   );

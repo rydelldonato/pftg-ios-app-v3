@@ -14,7 +14,11 @@ import styles from "./styles";
 import TermsPopUp from "../termsPopUp/termsPopUp";
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 export default function signUp(props) {
   const firebaseConfig = {
@@ -36,6 +40,7 @@ export default function signUp(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
   // const auth = getAuth();
 
   const handleSubmit = () => {
@@ -43,12 +48,26 @@ export default function signUp(props) {
       .then((userCredential) => {
         // User creation successful
         const user = userCredential.user;
-        console.log("User created:", user.uid);
+        updateProfile(user, {
+          displayName: displayName,
+        })
+          .then(() => {
+            console.log("Display name updated:", displayName);
+            console.log("User created:", user.uid);
+            // Rest of the code after updating the display name...
+          })
+          .catch((error) => {
+            console.error("Error updating display name:", error);
+            // Handle error if display name update fails...
+          });
 
         setModalVisible(!modalVisible);
         setEmail("");
         setPassword("");
-        window.alert(`Email: ${email}, Password: ${password}`);
+        setDisplayName("");
+        window.alert(
+          `Display Name: ${displayName} Email: ${email} Password: ${password}`
+        );
       })
       .catch((error) => {
         // User creation failed
@@ -84,7 +103,7 @@ export default function signUp(props) {
       >
         <TermsPopUp termsModal={termsModal} setTermsModal={setTermsModal} />
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={[styles.modalView, { height: 450 }]}>
             <TouchableWithoutFeedback
               hitSlop={{ top: 170, bottom: 170, left: 170, right: 170 }}
             >
@@ -121,6 +140,12 @@ export default function signUp(props) {
               for you
             </Text>
             <View>
+              <TextInput
+                placeholder="Display Name"
+                value={displayName}
+                onChangeText={setDisplayName}
+                style={styles.input}
+              />
               <TextInput
                 placeholder="Email"
                 value={email}

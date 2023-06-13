@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import SignUp from "../welcomePage/signUpPopUp/signUp";
 import ForgotPassword from "../forgotPassword/forgotPassword";
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import "firebase/auth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -27,7 +27,7 @@ export default function loginPopUp(props) {
     projectId: "peachy-s-food-to-go-app",
     storageBucket: "peachy-s-food-to-go-app.appspot.com",
     messagingSenderId: "1079556604883",
-    appId: "1:1079556604883:web:58b44aa27f50cf00d5e526"
+    appId: "1:1079556604883:web:58b44aa27f50cf00d5e526",
   };
 
   const app = initializeApp(firebaseConfig);
@@ -37,29 +37,28 @@ export default function loginPopUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpPopUp, setsignUpPopUp] = useState(false);
-  const [forgotPasswordPopUp, setForgotPasswordPopUp] = useState(false)
+  const [forgotPasswordPopUp, setForgotPasswordPopUp] = useState(false);
 
   // const auth = getAuth();
-
 
   const handleSubmit = () => {
     // Do something with the username and password
     signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    navigation.navigate('Home')
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    let errorMessage = "An error occurred"
-    if (errorCode === "auth/wrong-password") {
-      errorMessage = "Wrong password";
-    }
-    console.log(error)
-    window.alert(errorMessage)
-  });
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigation.navigate("Home");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        let errorMessage = "An error occurred";
+        if (errorCode === "auth/wrong-password") {
+          errorMessage = "Wrong password";
+        }
+        console.log(error);
+        window.alert(errorMessage);
+      });
 
     setModalVisible(!modalVisible);
     setEmail("");
@@ -83,7 +82,10 @@ export default function loginPopUp(props) {
         }}
         style={{ zIndex: 1 }}
       >
-        <ForgotPassword modalVisible={forgotPasswordPopUp} setModalVisible={setForgotPasswordPopUp} /> 
+        <ForgotPassword
+          modalVisible={forgotPasswordPopUp}
+          setModalVisible={setForgotPasswordPopUp}
+        />
         <SignUp modalVisible={signUpPopUp} setModalVisible={setsignUpPopUp} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -153,7 +155,9 @@ export default function loginPopUp(props) {
                 </TouchableHighlight>
               </View>
               <View style={{ marginTop: 23 }}>
-                <TouchableHighlight onPress={()=>setForgotPasswordPopUp(!forgotPasswordPopUp)}>
+                <TouchableHighlight
+                  onPress={() => setForgotPasswordPopUp(!forgotPasswordPopUp)}
+                >
                   <Text style={{ color: "#82B77D" }}>
                     Forgot your password?
                   </Text>

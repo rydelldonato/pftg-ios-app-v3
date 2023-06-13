@@ -18,6 +18,7 @@ import Dessert from "./pages/menu-categories/dessert/dessert";
 import Beverages from "./pages/menu-categories/beverages/beverages";
 import Locations from "./pages/locations-page/locations";
 import ContactPage from "./pages/contact-page/contactPage";
+import Profile from "./pages/profile-page/profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -89,6 +90,11 @@ export default function App() {
           name="Contact"
           component={ContactPage}
           options={{ title: "Contact", headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ title: "Profile", headerShown: false }}
         ></Stack.Screen>
       </Stack.Navigator>
       {/* <SignUp/> */}

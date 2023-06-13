@@ -4,7 +4,7 @@ import {
   FlatList,
   TouchableOpacity,
   Dimensions,
-  Image
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -18,7 +18,6 @@ export default function Beverages() {
   const category = "Beverages";
   const [searchModal, setSearchModal] = useState(false);
   const navigation = useNavigation();
-
 
   const menuItems = [
     {
@@ -95,7 +94,13 @@ export default function Beverages() {
               paddingTop: 15,
             }}
           >
-            <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 11, width: '100%' }}>
+            <Text
+              style={{
+                fontFamily: "Montserrat_700Bold",
+                fontSize: 11,
+                width: "100%",
+              }}
+            >
               {category}
             </Text>
           </View>
@@ -104,7 +109,7 @@ export default function Beverages() {
             setSearchModal={setSearchModal}
           />
         </View>
-        <View style={{position: 'absolute', left: '90%'}}>
+        <View style={{ position: "absolute", left: "90%" }}>
           <TouchableOpacity
             style={{ paddingTop: 10 }}
             onPress={() => {

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../../firebase.js";
 import {
   useFonts,
   Montserrat_700Bold,
@@ -18,6 +19,35 @@ export default function Profile() {
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();
+  };
+
+  // Get the currently signed-in user
+  const currentUser = auth.currentUser;
+  let displayName = "Guest";
+
+  if (currentUser) {
+    // User is signed in
+    const uid = currentUser.uid;
+    const email = currentUser.email;
+    displayName = currentUser.displayName;
+    const photoURL = currentUser.photoURL;
+
+    // You can use this information to display user-specific data or perform other operations
+    console.log(uid, email, displayName);
+  } else {
+    // User is not signed in
+    console.log("No user is currently signed in.");
+  }
+
+  const signOut = async () => {
+    try {
+      await auth.signOut();
+      console.log("User signed out successfully.");
+      navigation.navigate("Welcome");
+      // Perform any additional actions after signing out
+    } catch (error) {
+      console.log("An error occurred while signing out:", error);
+    }
   };
 
   return (
@@ -38,8 +68,10 @@ export default function Profile() {
             justifyContent: "space-between",
           }}
         >
-          <Text>User Name</Text>
-          <Text>Sign out</Text>
+          <Text>{displayName}</Text>
+          <TouchableOpacity onPress={signOut}>
+            <Text>Sign out</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

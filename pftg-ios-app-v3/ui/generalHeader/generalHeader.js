@@ -18,12 +18,14 @@ export default function GeneralHeader() {
   }
   // Get the currently signed-in user
   const currentUser = auth.currentUser;
+  let displayName = "Guest";
+
 
   if (currentUser) {
     // User is signed in
     const uid = currentUser.uid;
     const email = currentUser.email;
-    const displayName = currentUser.displayName;
+    displayName = currentUser.displayName;
     const photoURL = currentUser.photoURL;
 
     // You can use this information to display user-specific data or perform other operations

@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../../firebase.js";
@@ -7,6 +14,7 @@ import {
   Montserrat_700Bold,
   Montserrat_300Light,
 } from "@expo-google-fonts/montserrat";
+import ProfileFlatList from "../../ui/profilePage/profileFlatList.js";
 
 export default function Profile() {
   let [fontsLoaded] = useFonts({
@@ -57,8 +65,8 @@ export default function Profile() {
           <Image source={require("../../assets/back.png")} />
         </TouchableOpacity>
       </View>
-      <View style={{ marginTop: 130 }}>
-        <Text style={{ fontSize: 21, fontFamily: "Montserrat_700Bold" }}>
+      <View style={{ marginTop: 130, marginHorizontal: 20, }}>
+        <Text style={{ fontSize: 21, fontFamily: "Montserrat_700Bold", marginBottom: 7}}>
           Your profile
         </Text>
         <View
@@ -68,12 +76,23 @@ export default function Profile() {
             justifyContent: "space-between",
           }}
         >
-          <Text>{displayName}</Text>
+          <Text style={{ fontFamily: "Montserrat_300Light" }}>
+            {displayName}
+          </Text>
           <TouchableOpacity onPress={signOut}>
-            <Text>Sign out</Text>
+            <Text
+              style={{
+                textDecorationColor: "#2C69A9",
+                color: "#2C69A9",
+                textDecorationLine: "underline",
+              }}
+            >
+              Sign out
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
+      <ProfileFlatList />
     </View>
   );
 }

@@ -19,6 +19,7 @@ import Beverages from "./pages/menu-categories/beverages/beverages";
 import Locations from "./pages/locations-page/locations";
 import ContactPage from "./pages/contact-page/contactPage";
 import Profile from "./pages/profile-page/profile";
+import PersonalSettings from "./pages/personal-settings-page/personalSettings";
 
 
 const Stack = createNativeStackNavigator();
@@ -96,6 +97,11 @@ export default function App() {
           name="Profile"
           component={Profile}
           options={{ title: "Profile", headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Personal Settings"
+          component={PersonalSettings}
+          options={{ title: "Personal Settings", headerShown: false }}
         ></Stack.Screen>
       </Stack.Navigator>
       {/* <SignUp/> */}

@@ -6,7 +6,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../../firebase.js";
 import {
@@ -17,6 +17,7 @@ import {
 import ProfileFlatList from "../../ui/profilePage/profileFlatList.js";
 
 export default function Profile() {
+  const [signOutText, setSignOutText] = useState('Sign out')
   let [fontsLoaded] = useFonts({
     Montserrat_700Bold,
     Montserrat_300Light,
@@ -79,15 +80,14 @@ export default function Profile() {
           <Text style={{ fontFamily: "Montserrat_300Light" }}>
             {displayName}
           </Text>
-          <TouchableOpacity onPress={signOut}>
+          <TouchableOpacity onPress={currentUser?signOut:null}>
             <Text
               style={{
                 textDecorationColor: "#2C69A9",
                 color: "#2C69A9",
                 textDecorationLine: "underline",
               }}
-            >
-              Sign out
+            >{currentUser?'Sign out':''}
             </Text>
           </TouchableOpacity>
         </View>

@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
+import { v4 as uuidv4 } from "uuid";
+
 const accessKey = {
   developer_id: 'e1ddfb9d-cba8-49d8-afa9-4d87fe1394a4',
   key_id: '1abf145e-3d0e-475a-97f7-5375fcf0ce1d',
@@ -22,31 +24,24 @@ const token = jwt.sign(
   headers,
 );
 
-console.log(token);
-
-
 const body = JSON.stringify({
-  external_delivery_id: '0bef0487-fe9a-4bff-b3ba-f2bbc061c59a',
-  pickup_address: '901 Market Street 6th Floor San Francisco, CA 94103',
-  pickup_business_name: 'Wells Fargo SF Downtown',
+  external_delivery_id: uuidv4(),
+  pickup_address: '1600 Ethan Way Ste 30, Sacramento, CA 95825',
   pickup_phone_number: '+16505555555',
-  pickup_instructions: 'Enter gate code 1234 on the callbox.',
-  dropoff_address: '901 Market Street 6th Floor San Francisco, CA 94103',
-  dropoff_business_name: 'Wells Fargo SF Downtown',
+  dropoff_address: '2929 Edison Ave, Sacramento, CA 95821',
   dropoff_phone_number: '+16505555555',
-  dropoff_instructions: 'Enter gate code 1234 on the callbox.',
-  order_value: 1999,
-})
+});
+
 axios
-  .get('https://openapi.doordash.com/drive/v2/deliveries/0bef0487-fe9a-4bff-b3ba-f2bbc061c59a',{
+  .post('https://openapi.doordash.com/drive/v2/quotes', body, {
     headers: {
-      Authorization: 'Bearer ' + token,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   })
   .then(function (response) {
-    console.log(response.data)
+    console.log(response.data);
   })
   .catch(function (error) {
-    console.log(error)
-  })
+    console.log(error);
+  });

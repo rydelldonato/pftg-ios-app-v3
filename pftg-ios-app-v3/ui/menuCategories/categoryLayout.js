@@ -12,6 +12,7 @@ import SearchPopUp from "../orderPage/searchPopUp/searchPopUp";
 import menuItems from "../../backend/menuItems/menuItems";
 import styles from "./styles";
 import GeneralFooter from "../generalFooter/generalFooter";
+import CartComponent from "../orderPage/cartComponent/cartComponent";
 
 const { width } = Dimensions.get("window");
 const middleX = width / 2;
@@ -21,6 +22,7 @@ export default function categoryLayout(props) {
   const [searchModal, setSearchModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const navigation = useNavigation();
 
   const handleSearch = (category) => {
@@ -71,7 +73,9 @@ export default function categoryLayout(props) {
           shadowRadius: 3.84,
           elevation: 5,
         }}
-        onPress={() => console.log("Item pressed:", item.name)}
+        onPress={() => {
+          setCartItems([...cartItems, item.name]);
+        }}
       >
         <Image
           style={{
@@ -104,6 +108,7 @@ export default function categoryLayout(props) {
 
   return (
     <View>
+      <CartComponent items={cartItems} />
       <View style={{ position: "absolute", top: 50, left: 14, zIndex: 1 }}>
         <TouchableOpacity onPress={goBack}>
           <Image source={require("../../assets/back.png")} />

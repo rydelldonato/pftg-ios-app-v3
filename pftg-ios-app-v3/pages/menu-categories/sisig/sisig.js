@@ -1,6 +1,6 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import CategoryLayout from '../../../ui/menuCategories/categoryLayout'
+import { View, Text } from 'react-native';
+import React from 'react';
+import CategoryLayout from '../../../ui/menuCategories/categoryLayout';
 
 export default function Sisig() {
   return (

@@ -14,6 +14,7 @@ export default function CartComponent() {
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(CartContext);
   const [cartModal, setCartModal] = useState(false);
+  console.log(cartModal)
   return (
     <View style={styles.container}>
       <View style={styles.cartContainer}>
@@ -30,7 +31,7 @@ export default function CartComponent() {
         </TouchableHighlight>
       </View>
       <Modal
-        style={styles.modal}
+        contentContainerStyle={styles.modal}
         visible={cartModal}
         animationType="fade"
         transparent={true}
@@ -111,6 +112,8 @@ const styles = StyleSheet.create({
     top: 10,
     left: 10,
     width: 30,
+    padding: 1, // Add padding to increase touchable area
+    borderWidth:2,
     height: 30,
     borderRadius: 15,
     backgroundColor: "gray",

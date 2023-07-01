@@ -6,23 +6,25 @@ import {
   Dimensions,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import SearchPopUp from "../orderPage/searchPopUp/searchPopUp";
 import menuItems from "../../backend/menuItems/menuItems";
 import styles from "./styles";
 import GeneralFooter from "../generalFooter/generalFooter";
 import CartComponent from "../orderPage/cartComponent/cartComponent";
+import CartContext from "../orderPage/cartComponent/cartContext";
 
 const { width } = Dimensions.get("window");
 const middleX = width / 2;
 
 export default function categoryLayout(props) {
+  const { cartItems, addToCart, removeFromCart, clearCart } =
+    useContext(CartContext);
   const { category } = props;
   const [searchModal, setSearchModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
   const navigation = useNavigation();
 
   const handleSearch = (category) => {
@@ -73,9 +75,8 @@ export default function categoryLayout(props) {
           shadowRadius: 3.84,
           elevation: 5,
         }}
-        onPress={() => {
-          setCartItems([...cartItems, item.name]);
-        }}
+        onPress={() => {addToCart({id: item.name, name: item.name});
+        ;console.log(cartItems)}}
       >
         <Image
           style={{
@@ -108,7 +109,7 @@ export default function categoryLayout(props) {
 
   return (
     <View>
-      <CartComponent items={cartItems} />
+      <CartComponent/>
       <View style={{ position: "absolute", top: 50, left: 14, zIndex: 1 }}>
         <TouchableOpacity onPress={goBack}>
           <Image source={require("../../assets/back.png")} />

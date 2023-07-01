@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,12 @@ import {
   TouchableHighlight,
 } from "react-native";
 import GetQuote from "../getQuoteComponent/getQuoteComponent";
+import CartContext from "./cartContext";
 
-export default function CartComponent(props) {
-    const {items} = props
+export default function CartComponent() {
+  const { cartItems, addToCart, removeFromCart, clearCart } =
+    useContext(CartContext);
   const [cartModal, setCartModal] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-
   return (
     <View style={styles.container}>
       <View style={styles.cartContainer}>
@@ -44,7 +44,11 @@ export default function CartComponent(props) {
               <Text style={styles.closeButtonText}>X</Text>
             </TouchableHighlight>
             <View>
-              <Text>{items}</Text>
+              {cartItems.length === 0
+                ? null
+                : cartItems.map((item) => (
+                    <Text key={item.id}>{item.name}</Text>
+                  ))}
             </View>
             <View>
               <GetQuote />

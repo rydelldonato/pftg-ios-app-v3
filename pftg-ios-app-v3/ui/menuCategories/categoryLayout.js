@@ -75,8 +75,14 @@ export default function categoryLayout(props) {
           shadowRadius: 3.84,
           elevation: 5,
         }}
-        onPress={() => {addToCart({id: item.name, name: item.name});
-        ;console.log(cartItems)}}
+        onPress={() => {
+          const newItem = {
+            id: `${item.name}_${Date.now()}`, // Create a unique id for the item
+            name: item.name,
+          };
+          addToCart(newItem);
+          console.log(cartItems);
+        }}
       >
         <Image
           style={{
@@ -109,7 +115,7 @@ export default function categoryLayout(props) {
 
   return (
     <View>
-      <CartComponent/>
+      <CartComponent />
       <View style={{ position: "absolute", top: 50, left: 14, zIndex: 1 }}>
         <TouchableOpacity onPress={goBack}>
           <Image source={require("../../assets/back.png")} />

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import GetQuote from "../getQuoteComponent/getQuoteComponent";
 import CartContext from "./cartContext";
+import CartComponentItems from "./cartComponentItems";
 
 export default function CartComponent() {
   const { cartItems, addToCart, removeFromCart, clearCart } =
@@ -47,15 +48,7 @@ export default function CartComponent() {
             </TouchableHighlight>
             <View>
               <View style={{ display: "flex", height: "70%" }}>
-                <View style={{ height: "100%" }}>
-                  <FlatList
-                    data={cartItems}
-                    renderItem={({ item }) => (
-                      <Text key={item.id}>{item.name}</Text>
-                    )}
-                    keyExtractor={(item) => item.id}
-                  />
-                </View>
+                <CartComponentItems/>
                 <View>
                   <GetQuote />
                 </View>

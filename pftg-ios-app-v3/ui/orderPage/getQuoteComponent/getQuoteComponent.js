@@ -30,14 +30,12 @@ export default function getQuote() {
   };
   return (
     <View>
-      <View style={{ borderWidth: 1 }}>
+      <View>
         <TextInput
-          style={{ borderWidth: 1 }}
           placeholder="enter a dropoff address"
           onChangeText={handleChangeAddress}
         ></TextInput>
         <TextInput
-          style={{ borderWidth: 1 }}
           placeholder="enter a dropoff phone number"
           keyboardType="numeric"
           onChangeText={handleChangePhoneNumber}

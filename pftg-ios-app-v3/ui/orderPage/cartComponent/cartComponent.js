@@ -6,6 +6,7 @@ import {
   Image,
   Modal,
   TouchableHighlight,
+  FlatList,
 } from "react-native";
 import GetQuote from "../getQuoteComponent/getQuoteComponent";
 import CartContext from "./cartContext";
@@ -14,7 +15,7 @@ export default function CartComponent() {
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(CartContext);
   const [cartModal, setCartModal] = useState(false);
-  console.log(cartModal)
+
   return (
     <View style={styles.container}>
       <View style={styles.cartContainer}>
@@ -45,14 +46,20 @@ export default function CartComponent() {
               <Text style={styles.closeButtonText}>X</Text>
             </TouchableHighlight>
             <View>
-              {cartItems.length === 0
-                ? null
-                : cartItems.map((item) => (
-                    <Text key={item.id}>{item.name}</Text>
-                  ))}
-            </View>
-            <View>
-              <GetQuote />
+              <View style={{ display: "flex", height: "70%" }}>
+                <View style={{ height: "100%" }}>
+                  <FlatList
+                    data={cartItems}
+                    renderItem={({ item }) => (
+                      <Text key={item.id}>{item.name}</Text>
+                    )}
+                    keyExtractor={(item) => item.id}
+                  />
+                </View>
+                <View>
+                  <GetQuote />
+                </View>
+              </View>
             </View>
           </View>
         </View>
@@ -66,16 +73,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    top: 0,
-    left: 150,
-    right: 0,
-    bottom: 300,
-    zIndex: 1,
+    zIndex: 2
   },
   cartContainer: {
     borderWidth: 1,
     borderRadius: 50,
+    position: 'absolute',
+    top: 50,
   },
   imageContainer: {
     width: 40,
@@ -95,13 +99,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modal: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // Add any specific styles for the modal content if needed
   },
   modalContent: {
-    width: 200,
-    height: 200,
+    height: 300,
+    display: "flex",
     backgroundColor: "white",
     borderRadius: 10,
     justifyContent: "center",
@@ -111,14 +113,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     left: 10,
-    width: 30,
-    padding: 1, // Add padding to increase touchable area
-    borderWidth:2,
+    width: 60,
+    borderWidth: 2,
     height: 30,
     borderRadius: 15,
     backgroundColor: "gray",
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 2,
   },
   closeButtonText: {
     color: "white",

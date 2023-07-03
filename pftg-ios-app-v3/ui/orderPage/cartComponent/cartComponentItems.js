@@ -15,61 +15,35 @@ export default function cartComponentItems() {
 
   const Item = ({ title, image, price, onPress }) => (
     <TouchableOpacity onPress={onPress}>
-      <View>
-        <View
-          style={[
-            styles.item,
-            {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            },
-          ]}
-        >
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <Image
-              style={{ width: 50, height: 53, marginLeft: 22, marginRight: 18 }}
-              source={image}
-            />
-            <View>
-              <Text
-                style={[
-                  styles.title,
-                  { fontFamily: "Montserrat_700Bold", marginTop: 12 },
-                ]}
-              >
-                {title}
-              </Text>
-              <Text>{price}</Text>
-            </View>
+      <View style={{ width: 370 }}>
+        <View style={[styles.item, { flexDirection: "row" }]}>
+          <Image
+            style={{
+              width: 30,
+              height: 33,
+              marginLeft: 22,
+              marginRight: 18,
+            }}
+            source={image}
+          />
+          <View style={{ flexDirection: "column" }}>
+            <Text
+              style={[styles.title, { fontFamily: "Montserrat_400Regular" }]}
+            >
+              {title}
+            </Text>
+            <Text style={{ fontFamily: "Montserrat_700Bold" }}>{price}</Text>
           </View>
-          <View style={{ marginTop: 12 }}>
-            <Image
-              style={{ marginRight: 31 }}
-              source={require("../../../assets/moreThan.png")}
-            />
-          </View>
+          <View style={{ flex: 1 }} />
+          <Image
+            style={{ marginRight: 31 }}
+            source={require("../../../assets/moreThan.png")}
+          />
         </View>
-        <View
-          style={{
-            height: 10,
-            width: 390,
-            borderBottomColor: "black",
-            borderBottomWidth: 1,
-            marginVertical: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 4,
-            },
-            shadowOpacity: 0.35,
-            shadowRadius: 3.84,
-            elevation: 5,
-          }}
-        ></View>
       </View>
     </TouchableOpacity>
   );
+
   return (
     <View style={{ height: "100%" }}>
       <FlatList
@@ -85,12 +59,20 @@ export default function cartComponentItems() {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#82B77D",
+    backgroundColor: "white",
     paddingTop: 10,
     paddingBottom: 10,
     marginVertical: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   title: {
-    fontSize: 22,
+    fontSize: 12,
   },
 });

@@ -6,15 +6,11 @@ import {
   Image,
   Modal,
   TouchableHighlight,
-  FlatList,
 } from "react-native";
 import GetQuote from "../getQuoteComponent/getQuoteComponent";
-import CartContext from "./cartContext";
 import CartComponentItems from "./cartComponentItems";
 
 export default function CartComponent() {
-  const { cartItems, addToCart, removeFromCart, clearCart } =
-    useContext(CartContext);
   const [cartModal, setCartModal] = useState(false);
 
   return (

@@ -79,6 +79,8 @@ export default function categoryLayout(props) {
           const newItem = {
             id: `${item.name}_${Date.now()}`, // Create a unique id for the item
             name: item.name,
+            image: item.image,
+            price: item.price
           };
           addToCart(newItem);
           console.log(cartItems);

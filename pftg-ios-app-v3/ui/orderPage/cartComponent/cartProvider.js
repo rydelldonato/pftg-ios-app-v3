@@ -23,9 +23,15 @@ const CartProvider = ({ children }) => {
     }
   };
 
+ // Function to update cart items in the context
+const updateCartItems = (updatedCartItems) => {
+  // Call a function from your CartContext to update the cart items
+  setCartItems(updatedCartItems);
+};
+
   const removeFromCart = (item) => {
     const updatedCartItems = cartItems.filter(
-      (cartItem) => cartItem.id !== item.id
+      (cartItem) => cartItem.name !== item.name
     );
     setCartItems(updatedCartItems);
   };
@@ -39,6 +45,7 @@ const CartProvider = ({ children }) => {
       value={{
         cartItems,
         addToCart,
+        updateCartItems,
         removeFromCart,
         clearCart,
       }}

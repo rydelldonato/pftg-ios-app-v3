@@ -10,16 +10,30 @@ import React, { useContext, useState } from "react";
 import CartContext from "./cartContext";
 
 export default function cartComponentItems() {
-  const { cartItems, addToCart, removeFromCart, clearCart } =
+  const { cartItems, addToCart, updateCartItems, removeFromCart, clearCart } =
     useContext(CartContext);
 
-  const subtractQuantity = (quantity) =>{
+  const subtractQuantity = (title) => {
     //find the cart item that matches the item that was touched
-      //subtract 1 from that found cart items quantity value
-      return quantity - 1
-  } 
+    let foundItem = cartItems.find((item) => item.name === title);
+    //subtract 1 from that found cart items quantity value
+    if (foundItem) {
+      const updatedItem = {
+        ...foundItem,
+        quantity: foundItem.quantity - 1,
+      };
+      if (updatedItem.quantity === 0) {
+        removeFromCart(foundItem);
+      } else {
+        const updatedCartItems = cartItems.map((item) => {
+          return item.name === title ? updatedItem : item;
+        });
+        return updateCartItems(updatedCartItems);
+      }
+    }
+  };
 
-  const Item = ({ title, image, price,quantity,onPress }) => (
+  const Item = ({ title, image, price, quantity, onPress }) => (
     <TouchableOpacity onPress={onPress}>
       <View style={{ width: 370 }}>
         <View style={[styles.item, { flexDirection: "row" }]}>
@@ -41,7 +55,7 @@ export default function cartComponentItems() {
             <Text style={{ fontFamily: "Montserrat_700Bold" }}>{price}</Text>
           </View>
           <View style={{ flex: 1 }} />
-          <TouchableOpacity onPress={()=>subtractQuantity(quantity)}>
+          <TouchableOpacity onPress={() => subtractQuantity(title)}>
             <Image source={require("../../../assets/minusSign.png")} />
           </TouchableOpacity>
           <Text style={{ margin: 4, fontFamily: "Montserrat_700Bold" }}>
@@ -54,10 +68,11 @@ export default function cartComponentItems() {
       </View>
     </TouchableOpacity>
   );
-  const uniqueCartItems = Array.from(new Set(cartItems.map(item => item.name)))
-  .map(name => {
-    return cartItems.find(item => item.name === name);
-  })
+  const uniqueCartItems = Array.from(
+    new Set(cartItems.map((item) => item.name))
+  ).map((name) => {
+    return cartItems.find((item) => item.name === name);
+  });
   //there are now no duplicates in the flatlist, but need to change the quantity somehow
 
   return (
@@ -65,7 +80,12 @@ export default function cartComponentItems() {
       <FlatList
         data={uniqueCartItems}
         renderItem={({ item }) => (
-          <Item title={item.name} image={item.image} price={item.price} quantity={item.quantity} />
+          <Item
+            title={item.name}
+            image={item.image}
+            price={item.price}
+            quantity={item.quantity}
+          />
         )}
         keyExtractor={(item) => item.id}
       />

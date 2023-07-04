@@ -80,10 +80,11 @@ export default function categoryLayout(props) {
             id: `${item.name}_${Date.now()}`, // Create a unique id for the item
             name: item.name,
             image: item.image,
-            price: item.price
+            price: item.price,
+            quantity: item.quantity
           };
           addToCart(newItem);
-          console.log(cartItems);
+          console.log(newItem.quantity);
         }}
       >
         <Image

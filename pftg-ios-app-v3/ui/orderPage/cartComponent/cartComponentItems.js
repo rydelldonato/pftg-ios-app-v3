@@ -6,14 +6,15 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CartContext from "./cartContext";
 
 export default function cartComponentItems() {
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(CartContext);
+  const [itemAmount, setItemAmount] = useState(1);
 
-  const Item = ({ title, image, price, onPress }) => (
+  const Item = ({ title, image, price,quantity,onPress }) => (
     <TouchableOpacity onPress={onPress}>
       <View style={{ width: 370 }}>
         <View style={[styles.item, { flexDirection: "row" }]}>
@@ -35,21 +36,31 @@ export default function cartComponentItems() {
             <Text style={{ fontFamily: "Montserrat_700Bold" }}>{price}</Text>
           </View>
           <View style={{ flex: 1 }} />
-          <Image
-            style={{ marginRight: 31 }}
-            source={require("../../../assets/moreThan.png")}
-          />
+          <TouchableOpacity>
+            <Image source={require("../../../assets/minusSign.png")} />
+          </TouchableOpacity>
+          <Text style={{ margin: 4, fontFamily: "Montserrat_700Bold" }}>
+            {quantity}
+          </Text>
+          <TouchableOpacity>
+            <Image source={require("../../../assets/plusSign.png")} />
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
   );
+  const uniqueCartItems = Array.from(new Set(cartItems.map(item => item.name)))
+  .map(name => {
+    return cartItems.find(item => item.name === name);
+  })
+  //there are now no duplicates in the flatlist, but need to change the quantity somehow
 
   return (
     <View style={{ height: "100%" }}>
       <FlatList
-        data={cartItems}
+        data={uniqueCartItems}
         renderItem={({ item }) => (
-          <Item title={item.name} image={item.image} price={item.price} />
+          <Item title={item.name} image={item.image} price={item.price} quantity={item.quantity} />
         )}
         keyExtractor={(item) => item.id}
       />

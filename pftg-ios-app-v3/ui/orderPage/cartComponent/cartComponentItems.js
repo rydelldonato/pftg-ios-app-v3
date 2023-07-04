@@ -12,7 +12,12 @@ import CartContext from "./cartContext";
 export default function cartComponentItems() {
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(CartContext);
-  const [itemAmount, setItemAmount] = useState(1);
+
+  const subtractQuantity = (quantity) =>{
+    //find the cart item that matches the item that was touched
+      //subtract 1 from that found cart items quantity value
+      return quantity - 1
+  } 
 
   const Item = ({ title, image, price,quantity,onPress }) => (
     <TouchableOpacity onPress={onPress}>
@@ -36,7 +41,7 @@ export default function cartComponentItems() {
             <Text style={{ fontFamily: "Montserrat_700Bold" }}>{price}</Text>
           </View>
           <View style={{ flex: 1 }} />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>subtractQuantity(quantity)}>
             <Image source={require("../../../assets/minusSign.png")} />
           </TouchableOpacity>
           <Text style={{ margin: 4, fontFamily: "Montserrat_700Bold" }}>

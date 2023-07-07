@@ -33,6 +33,20 @@ export default function cartComponentItems() {
     }
   };
 
+  const addQuantity = (title) =>{
+    let foundItem = cartItems.find((item) => item.name === title);
+    if (foundItem) {
+      const updatedItem = {
+        ...foundItem,
+        quantity: foundItem.quantity + 1,
+      };
+        const updatedCartItems = cartItems.map((item) => {
+          return item.name === title ? updatedItem : item;
+        });
+        return updateCartItems(updatedCartItems);
+    }
+  }
+console.log(cartItems);
   const Item = ({ title, image, price, quantity, onPress }) => (
     <TouchableOpacity onPress={onPress}>
       <View style={{ width: 370 }}>
@@ -61,7 +75,7 @@ export default function cartComponentItems() {
           <Text style={{ margin: 4, fontFamily: "Montserrat_700Bold" }}>
             {quantity}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => addQuantity(title)}>
             <Image source={require("../../../assets/plusSign.png")} />
           </TouchableOpacity>
         </View>

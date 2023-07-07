@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   useFonts,
   Montserrat_700Bold,
@@ -36,9 +37,18 @@ export default function Locations() {
 
     Linking.openURL(url);
   };
+  const navigation = useNavigation();
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
+      <View style={{ position: "absolute", top: 70, left: 24, zIndex: 1 }}>
+        <TouchableOpacity onPress={goBack}>
+          <Image source={require("../../assets/back.png")} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.centeredView}>
         <TouchableOpacity onPress={handlePress}>
           <Image

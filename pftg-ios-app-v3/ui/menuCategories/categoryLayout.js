@@ -118,7 +118,6 @@ export default function categoryLayout(props) {
 
   return (
     <View>
-      <CartComponent />
       <View style={{ position: "absolute", top: 70, left: 24, zIndex: 1 }}>
         <TouchableOpacity onPress={goBack}>
           <Image source={require("../../assets/back.png")} />

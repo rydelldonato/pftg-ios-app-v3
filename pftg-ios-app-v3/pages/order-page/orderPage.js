@@ -5,7 +5,6 @@ import Header from "../../ui/orderPage/header/header";
 import PickupDeliverySlider from "../../ui/orderPage/pickupDeliverySlider/pickupDeliverySlider";
 import Address from "../../ui/orderPage/address/address";
 import Menu from "../../ui/orderPage/menu/menu";
-import CartComponent from "../../ui/orderPage/cartComponent/cartComponent";
 
 export default function OrderPage() {
   const [searchPopUp, setSearchPopUp] = useState(false);
@@ -15,7 +14,6 @@ export default function OrderPage() {
       <Header />
       <PickupDeliverySlider />
       <Address/>
-      <CartComponent/>
       <Menu />
       <GeneralFooter />
     </View>

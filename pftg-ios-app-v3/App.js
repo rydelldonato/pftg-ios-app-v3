@@ -21,12 +21,16 @@ import ContactPage from "./pages/contact-page/contactPage";
 import Profile from "./pages/profile-page/profile";
 import PersonalSettings from "./pages/personal-settings-page/personalSettings";
 import CartProvider from "./ui/orderPage/cartComponent/cartProvider";
+import AppWrapper from "./pages/appWrapper";
+import CartComponent from "./ui/orderPage/cartComponent/cartComponent";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    <>
     <CartProvider>
+      <CartComponent/> 
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -112,6 +116,7 @@ export default function App() {
         <StatusBar style="auto" />
       </NavigationContainer>
     </CartProvider>
+    </>
   );
 }
 

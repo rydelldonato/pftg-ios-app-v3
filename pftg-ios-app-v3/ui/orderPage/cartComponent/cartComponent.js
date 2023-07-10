@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,53 +6,89 @@ import {
   Image,
   Modal,
   TouchableHighlight,
+  Animated,
+  TouchableOpacity,
 } from "react-native";
 import GetQuote from "../getQuoteComponent/getQuoteComponent";
 import CartComponentItems from "./cartComponentItems";
+import CartContext from "./cartContext";
 
 export default function CartComponent() {
   const [cartModal, setCartModal] = useState(false);
+  const { cartItems, addToCart, removeFromCart, clearCart } = useContext(
+    CartContext
+  );
+  const [scaleValue] = useState(new Animated.Value(1));
+
+
+  const animateCartContainer = () => {
+    Animated.timing(scaleValue, {
+      toValue: 1.2,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      Animated.timing(scaleValue, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.cartContainer}>
-        <TouchableHighlight
-          style={{ borderRadius: 50 }}
-          onPress={() => setCartModal(!cartModal)}
-        >
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={require("../../../assets/shoppingCartGif.gif")}
-            />
+      {cartItems.length > 0 ? (
+        <>
+          <View
+            style={[
+              styles.cartContainer,
+            ]}
+          >
+              <TouchableOpacity
+                style={{ borderRadius: 50, justifyContent: "flex-end", display: 'flex', flexDirection: 'row' }}
+                onPress={() => {
+                  setCartModal(!cartModal);
+                  animateCartContainer();
+                }}
+              >
+            <View style={{ paddingRight: 150, paddingTop: 10 }}>
+              <Text>Checkout Now</Text>
+            </View>
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  source={require("../../../assets/shoppingCart.png")}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableHighlight>
-      </View>
-      <Modal
-        contentContainerStyle={styles.modal}
-        visible={cartModal}
-        animationType="fade"
-        transparent={true}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <TouchableHighlight
-              style={styles.closeButton}
-              onPress={() => setCartModal(false)}
-            >
-              <Text style={styles.closeButtonText}>X</Text>
-            </TouchableHighlight>
-            <View>
-              <View style={{ display: "flex", height: "70%" }}>
-                <CartComponentItems/>
+          <Modal
+            contentContainerStyle={styles.modal}
+            visible={cartModal}
+            animationType="fade"
+            transparent={true}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <TouchableHighlight
+                  style={styles.closeButton}
+                  onPress={() => setCartModal(false)}
+                >
+                  <Text style={styles.closeButtonText}>X</Text>
+                </TouchableHighlight>
                 <View>
-                  <GetQuote />
+                  <View style={{ display: "flex", height: "70%" }}>
+                    <CartComponentItems />
+                    <View>
+                      <GetQuote />
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-        </View>
-      </Modal>
+          </Modal>
+        </>
+      ) : null}
     </View>
   );
 }
@@ -62,14 +98,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 2
+    position: "absolute",
+    top: 700,
+    left: 180,
+    zIndex: 22,
   },
   cartContainer: {
-    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
     borderRadius: 50,
-    position: 'absolute',
-    top: 50,
-  },
+    position: "absolute",
+    zIndex: 2,
+    padding: 11,
+    backgroundColor: "rgba(250, 237, 205, .8)", // Example: Red color with 50% transparency
+  },  
   imageContainer: {
     width: 40,
     height: 40,
@@ -115,5 +157,13 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "white",
     fontSize: 18,
+  },
+  background: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "#FAEDCD",
   },
 });

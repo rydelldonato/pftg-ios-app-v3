@@ -1,18 +1,25 @@
+import React,{useState} from "react";
 import { View, Text, TouchableHighlight, Image } from "react-native";
 import SignUp from "../../ui/welcomePage/signUpPopUp/signUp";
 import LoginPopUp from "../../ui/loginPopUp/loginPopUp";
-import React, { useState } from "react";
 import styles from "./styles";
 import {
   useFonts,
   JuliusSansOne_400Regular,
 } from "@expo-google-fonts/julius-sans-one";
 import { K2D_400Regular, K2D_600SemiBold } from "@expo-google-fonts/k2d";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Welcome({ navigation }) {
+
+const Welcome = ({ setCurrentPage}) => {
   const [signUpModalVisible, setSignUpModalVisible] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const navigation = useNavigation();
 
+  const navigateToHomePage = () => {
+    setCurrentPage("Home");
+    navigation.navigate("Home")
+  };
   let [fontsLoaded] = useFonts({
     JuliusSansOne_400Regular,
     K2D_400Regular,
@@ -21,6 +28,7 @@ export default function Welcome({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+ 
 
   return (
     <View style={styles.welcomePage}>
@@ -86,7 +94,7 @@ export default function Welcome({ navigation }) {
         </TouchableHighlight>
       </View>
       <Text
-        onPress={() => navigation.navigate("Home")}
+        onPress={navigateToHomePage}
         style={[
           { fontSize: 16 },
           { textDecorationLine: "underline" },
@@ -97,4 +105,6 @@ export default function Welcome({ navigation }) {
       </Text>
     </View>
   );
-}
+};
+
+export default Welcome;

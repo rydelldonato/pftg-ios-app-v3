@@ -24,7 +24,7 @@ export default function DealsWindow() {
         return null;
       }
       return (
-        <View style={[styles.main, { alignItems: "center" }]}>
+        <View style={{ alignItems: "center", marginBottom: 640 }}>
           <View
             style={[
               styles.header,

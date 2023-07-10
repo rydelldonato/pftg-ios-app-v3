@@ -116,7 +116,7 @@ export default function categoryLayout(props) {
 
   return (
     <View>
-      <View style={{ position: "absolute", top: 70, left: 24, zIndex: 1 }}>
+      <View style={{ position: "absolute", top: 50, left: 24, zIndex: 1 }}>
         <TouchableOpacity onPress={goBack}>
           <Image source={require("../../assets/back.png")} />
         </TouchableOpacity>

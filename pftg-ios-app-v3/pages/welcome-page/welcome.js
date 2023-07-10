@@ -39,6 +39,7 @@ const Welcome = ({ setCurrentPage}) => {
       <LoginPopUp
         modalVisible={loginModalVisible}
         setModalVisible={setLoginModalVisible}
+        setCurrentPage={setCurrentPage}
       />
       <View style={styles.logo}>
         <Image source={require("../../assets/welcome-page-logo.png")} />

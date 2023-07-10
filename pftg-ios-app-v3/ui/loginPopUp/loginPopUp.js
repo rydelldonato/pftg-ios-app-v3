@@ -32,7 +32,7 @@ export default function loginPopUp(props) {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const { modalVisible, setModalVisible } = props;
+  const { modalVisible, setModalVisible, setCurrentPage } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,6 +47,7 @@ export default function loginPopUp(props) {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        setCurrentPage("Home");
         navigation.navigate("Home");
         // ...
       })

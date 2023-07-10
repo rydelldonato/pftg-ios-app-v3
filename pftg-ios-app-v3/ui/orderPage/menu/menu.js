@@ -68,6 +68,10 @@ export default function menu() {
       image: require("../../../assets/logo.png"),
     },
   ];
+  const renderFooter = () => {
+    // Add this function to render an empty view as a footer
+    return <View style={{ height: 100 }} />;
+  };
 
   const Item = ({ title, image, onPress }) => (
     <TouchableOpacity onPress={onPress}>
@@ -149,6 +153,7 @@ export default function menu() {
           />
         )}
         keyExtractor={(item) => item.id}
+        ListFooterComponent={renderFooter}
       />
     </View>
   );

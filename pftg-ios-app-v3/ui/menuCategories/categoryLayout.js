@@ -11,8 +11,6 @@ import { useNavigation } from "@react-navigation/native";
 import SearchPopUp from "../orderPage/searchPopUp/searchPopUp";
 import menuItems from "../../backend/menuItems/menuItems";
 import styles from "./styles";
-import GeneralFooter from "../generalFooter/generalFooter";
-import CartComponent from "../orderPage/cartComponent/cartComponent";
 import CartContext from "../orderPage/cartComponent/cartContext";
 
 const { width } = Dimensions.get("window");
@@ -197,7 +195,6 @@ export default function categoryLayout(props) {
           renderItem={renderItem}
         />
       </View>
-      <GeneralFooter />
     </View>
   );
 }

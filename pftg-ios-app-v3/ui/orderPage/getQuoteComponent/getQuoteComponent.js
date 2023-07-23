@@ -1,7 +1,12 @@
 import { View, Text, TextInput, Button } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getRandomValues } from "react-native-get-random-values";
+// import jwt from 'jsonwebtoken'
+import axios from 'axios';
+import getQuoteFunction from "../../../backend/getQuote";
+import jwtDecode from 'jwt-decode';
+
 
 export default function getQuote() {
   uuidv4({ random: getRandomValues });
@@ -26,7 +31,14 @@ export default function getQuote() {
   };
   const handleSubmit = () => {
     // Handle form submission
-    console.log("Input value:", quoteData);
+    getQuoteFunction()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  console.log("Input value:", quoteData);
   };
   return (
     <View>

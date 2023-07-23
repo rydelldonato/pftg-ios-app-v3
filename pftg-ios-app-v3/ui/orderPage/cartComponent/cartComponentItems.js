@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React, { useContext, useState } from "react";
 import CartContext from "./cartContext";
+import Subtotal from "./subtotal/subtotal";
 
 export default function cartComponentItems() {
   const { cartItems, addToCart, updateCartItems, removeFromCart, clearCart } =
@@ -46,7 +47,7 @@ export default function cartComponentItems() {
         return updateCartItems(updatedCartItems);
     }
   }
-console.log(cartItems);
+console.log('cart Items',cartItems);
   const Item = ({ title, image, price, quantity, onPress }) => (
     <TouchableOpacity onPress={onPress}>
       <View style={{ width: 370 }}>
@@ -103,6 +104,7 @@ console.log(cartItems);
         )}
         keyExtractor={(item) => item.id}
       />
+      <Subtotal cartItems={cartItems}/>
     </View>
   );
 }

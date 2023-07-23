@@ -43,6 +43,7 @@ export default function getQuote() {
     console.log("Input value:", quoteData);
   };
   return (
+    <View>
       <View style={styles.container}>
         <Text style={styles.mainHeading}>
           Please Enter The Full Dropoff Address
@@ -65,10 +66,11 @@ export default function getQuote() {
         ></TextInput>
         <TouchableHighlight onPress={handleSubmit}>
         <View style={styles.submitButton}>
-          <Text style={styles.submitButtonText}>Submit</Text>
+          <Text style={styles.submitButtonText}>Proceed To Checkout</Text>
         </View>
         </TouchableHighlight>
       </View>
+    </View>
   );
 }
 const styles = StyleSheet.create({

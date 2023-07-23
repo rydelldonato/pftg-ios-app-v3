@@ -79,7 +79,6 @@ export default function CartComponent() {
                   <View style={{ display: "flex", height: "70%" }}>
                     <CartComponentItems />
                     <View>
-                      <Text>Checkout Now</Text>
                       <GetQuote />
                     </View>
                   </View>

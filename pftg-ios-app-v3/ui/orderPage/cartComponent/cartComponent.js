@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     // Add any specific styles for the modal content if needed
   },
   modalContent: {
-    height: 300,
+    height: 600,
     width: 380,
     display: "flex",
     backgroundColor: "white",

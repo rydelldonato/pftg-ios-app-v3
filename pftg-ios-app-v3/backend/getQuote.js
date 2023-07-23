@@ -56,15 +56,16 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from "uuid";
 
-async function getQuoteFunction() {
-  const body = JSON.stringify({
-    external_delivery_id: uuidv4(),
-    pickup_address: '110 N El Dorado St, Stockton, CA 95202, USA',
-    pickup_phone_number: '+16505555555',
-    dropoff_address: '3129 English Oak Cir, Stockton, CA 95209, USA',
-    dropoff_phone_number: '+16505555555',
-  });
+async function getQuoteFunction(quoteData) {
 
+  const body = JSON.stringify(quoteData);
+  // {
+  //   external_delivery_id: uuidv4(),
+  //   pickup_address: '110 N El Dorado St, Stockton, CA 95202, USA',
+  //   pickup_phone_number: '+16505555555',
+  //   dropoff_address: '3129 English Oak Cir, Stockton, CA 95209, USA',
+  //   dropoff_phone_number: '+16505555555',
+  // }
   try {
     // Make a request to your secure backend endpoint to get the JWT token
     const tokenResponse = await axios.get('https://jwt-pftg-ios-app-v3-kdd2h08wy-rydelldonato.vercel.app/api/generateToken');
@@ -79,7 +80,6 @@ async function getQuoteFunction() {
         'Content-Type': 'application/json',
       },
     });
-
     console.log(response.data);
     return response.data; // Return the response data to be used in your React Native app.
   } catch (error) {

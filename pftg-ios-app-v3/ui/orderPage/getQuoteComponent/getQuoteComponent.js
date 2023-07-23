@@ -43,8 +43,10 @@ export default function getQuote() {
     console.log("Input value:", quoteData);
   };
   return (
-    <View>
-      <View>
+      <View style={styles.container}>
+        <View style={{paddingHorizontal: 100}}>
+        <Text style={styles.subHeading}>Get a quote on delivery fee</Text>
+        </View>
         <Text style={styles.mainHeading}>
           Please Enter The Full Dropoff Address
         </Text>
@@ -70,10 +72,23 @@ export default function getQuote() {
         </View>
         </TouchableHighlight>
       </View>
-    </View>
   );
 }
 const styles = StyleSheet.create({
+  container:{
+    backgroundColor: "white",
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginVertical: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   mainHeading: {
     fontSize: 16,
     fontWeight: "bold",

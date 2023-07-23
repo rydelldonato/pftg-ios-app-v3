@@ -44,9 +44,6 @@ export default function getQuote() {
   };
   return (
       <View style={styles.container}>
-        <View style={{paddingHorizontal: 100}}>
-        <Text style={styles.subHeading}>Get a quote on delivery fee</Text>
-        </View>
         <Text style={styles.mainHeading}>
           Please Enter The Full Dropoff Address
         </Text>
@@ -77,9 +74,6 @@ export default function getQuote() {
 const styles = StyleSheet.create({
   container:{
     backgroundColor: "white",
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginVertical: 8,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -90,13 +84,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   mainHeading: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  subHeading: {
     fontSize: 12,
     fontWeight: "bold",
+    fontFamily: "Montserrat_700Bold"
+  },
+  subHeading: {
+    fontSize: 8,
+    fontWeight: "bold",
     color: "gray",
+    fontFamily: "Montserrat_400Regular"
   },
   textInput: {
     borderWidth: 1,

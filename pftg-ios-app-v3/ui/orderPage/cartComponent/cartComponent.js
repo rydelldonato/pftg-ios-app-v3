@@ -15,11 +15,9 @@ import CartContext from "./cartContext";
 
 export default function CartComponent() {
   const [cartModal, setCartModal] = useState(false);
-  const { cartItems, addToCart, removeFromCart, clearCart } = useContext(
-    CartContext
-  );
+  const { cartItems, addToCart, removeFromCart, clearCart } =
+    useContext(CartContext);
   const [scaleValue] = useState(new Animated.Value(1));
-
 
   const animateCartContainer = () => {
     Animated.timing(scaleValue, {
@@ -39,21 +37,22 @@ export default function CartComponent() {
     <View style={styles.container}>
       {cartItems.length > 0 ? (
         <>
-          <View
-            style={[
-              styles.cartContainer,
-            ]}
-          >
-              <TouchableOpacity
-                style={{ borderRadius: 50, justifyContent: "flex-end", display: 'flex', flexDirection: 'row' }}
-                onPress={() => {
-                  setCartModal(!cartModal);
-                  animateCartContainer();
-                }}
-              >
-            <View style={{ paddingRight: 150, paddingTop: 10 }}>
-              <Text>Checkout Now</Text>
-            </View>
+          <View style={[styles.cartContainer]}>
+            <TouchableOpacity
+              style={{
+                borderRadius: 50,
+                justifyContent: "flex-end",
+                display: "flex",
+                flexDirection: "row",
+              }}
+              onPress={() => {
+                setCartModal(!cartModal);
+                animateCartContainer();
+              }}
+            >
+              <View style={{ paddingRight: 150, paddingTop: 10 }}>
+                <Text>Checkout Now</Text>
+              </View>
               <View style={styles.imageContainer}>
                 <Image
                   style={styles.image}
@@ -80,6 +79,7 @@ export default function CartComponent() {
                   <View style={{ display: "flex", height: "70%" }}>
                     <CartComponentItems />
                     <View>
+                      <Text>Checkout Now</Text>
                       <GetQuote />
                     </View>
                   </View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     padding: 11,
     backgroundColor: "rgba(250, 237, 205, .8)", // Example: Red color with 50% transparency
-  },  
+  },
   imageContainer: {
     width: 40,
     height: 40,

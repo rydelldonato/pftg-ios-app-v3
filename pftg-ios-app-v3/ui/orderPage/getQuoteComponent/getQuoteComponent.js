@@ -1,4 +1,11 @@
-import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  TouchableHighlight,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getRandomValues } from "react-native-get-random-values";
@@ -7,8 +14,9 @@ import axios from "axios";
 import getQuoteFunction from "../../../backend/getQuote";
 import jwtDecode from "jwt-decode";
 
-export default function getQuote() {
+export default function getQuote(props) {
   // uuidv4({ random: getRandomValues });
+  const { setCartModal, cartModal } = props;
   const [quoteData, setQuoteData] = useState({
     external_delivery_id: uuidv4(),
     pickup_address: "110 N El Dorado St, Stockton, CA 95202, USA",
@@ -56,7 +64,9 @@ export default function getQuote() {
           placeholder="123 Main St, City, State, ZIP"
           onChangeText={handleChangeAddress}
         ></TextInput>
-        <Text style={styles.mainHeading}>Please Enter The Dropoff Phone Number</Text>
+        <Text style={styles.mainHeading}>
+          Please Enter The Dropoff Phone Number
+        </Text>
         <Text style={styles.subHeading}>Enter Your Phone Number</Text>
         <TextInput
           style={styles.textInput}
@@ -64,17 +74,24 @@ export default function getQuote() {
           keyboardType="numeric"
           onChangeText={handleChangePhoneNumber}
         ></TextInput>
-        <TouchableHighlight onPress={handleSubmit}>
-        <View style={styles.submitButton}>
-          <Text style={styles.submitButtonText}>Proceed To Checkout</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight onPress={() => setCartModal(false)}>
+            <View style={styles.orderMoreButton}>
+              <Text style={styles.orderMoreButtonText}>Order More</Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={handleSubmit}>
+            <View style={styles.submitButton}>
+              <Text style={styles.submitButtonText}>Proceed To Checkout</Text>
+            </View>
+          </TouchableHighlight>
         </View>
-        </TouchableHighlight>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container:{
+  container: {
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
@@ -88,13 +105,13 @@ const styles = StyleSheet.create({
   mainHeading: {
     fontSize: 12,
     fontWeight: "bold",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   subHeading: {
     fontSize: 8,
     fontWeight: "bold",
     color: "gray",
-    fontFamily: "Montserrat_400Regular"
+    fontFamily: "Montserrat_400Regular",
   },
   textInput: {
     borderWidth: 1,
@@ -111,8 +128,25 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignItems: "center",
   },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
   submitButtonText: {
     color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  orderMoreButton: {
+    backgroundColor: "#FAEDCD", // Change the color to your desired theme
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+    alignItems: "center",
+  },
+  orderMoreButtonText: {
+    color: "black",
     fontSize: 16,
     fontWeight: "bold",
   },

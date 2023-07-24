@@ -79,7 +79,7 @@ export default function CartComponent() {
                   <View style={{ display: "flex", height: "70%" }}>
                     <CartComponentItems />
                     <View>
-                      <GetQuote />
+                      <GetQuote setCartModal={setCartModal} cartModal={cartModal} />
                     </View>
                   </View>
                 </View>

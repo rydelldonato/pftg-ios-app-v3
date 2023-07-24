@@ -18,7 +18,7 @@ export default function subtotal(props) {
     <View>
       <View style={styles.container}>
         <Text style={styles.mainText}>Subtotal</Text>
-        <Text>${total}</Text>
+        <Text style={styles.mainText}>${total}</Text>
       </View>
     </View>
   );
@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between' 
   },
   mainText: {
-    fontFamily: "K2D_400Regular",
+    fontFamily: "Montserrat_700Bold",
   },
 });

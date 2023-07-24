@@ -12,6 +12,7 @@ import {
 import GetQuote from "../getQuoteComponent/getQuoteComponent";
 import CartComponentItems from "./cartComponentItems";
 import CartContext from "./cartContext";
+import CartButtons from "./cartButtons/cartButtons";
 
 export default function CartComponent() {
   const [cartModal, setCartModal] = useState(false);
@@ -78,10 +79,13 @@ export default function CartComponent() {
                 <View>
                   <View style={{ display: "flex", height: "70%" }}>
                     <CartComponentItems />
-                    <View>
-                      <GetQuote setCartModal={setCartModal} cartModal={cartModal} />
-                    </View>
                   </View>
+                    <View>
+                      <CartButtons
+                        setCartModal={setCartModal}
+                        cartModal={cartModal}
+                      />
+                    </View>
                 </View>
               </View>
             </View>

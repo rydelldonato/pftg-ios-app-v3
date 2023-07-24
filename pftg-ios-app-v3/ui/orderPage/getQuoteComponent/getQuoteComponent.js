@@ -14,9 +14,8 @@ import axios from "axios";
 import getQuoteFunction from "../../../backend/getQuote";
 import jwtDecode from "jwt-decode";
 
-export default function getQuote(props) {
+export default function getQuote() {
   // uuidv4({ random: getRandomValues });
-  const { setCartModal, cartModal } = props;
   const [quoteData, setQuoteData] = useState({
     external_delivery_id: uuidv4(),
     pickup_address: "110 N El Dorado St, Stockton, CA 95202, USA",
@@ -74,18 +73,6 @@ export default function getQuote(props) {
           keyboardType="numeric"
           onChangeText={handleChangePhoneNumber}
         ></TextInput>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight onPress={() => setCartModal(false)}>
-            <View style={[styles.orderMoreButton,{width: 150}]}>
-              <Text style={styles.orderMoreButtonText}>Order More</Text>
-            </View>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={handleSubmit}>
-            <View style={[styles.submitButton,{width: 150}]}>
-              <Text style={styles.submitButtonText}>Review & Pay</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
       </View>
     </View>
   );
@@ -120,34 +107,5 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     marginBottom: 15,
-  },
-  submitButton: {
-    backgroundColor: "#82B77D", // Change the color to your desired theme
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-    alignItems: "center",
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-  },
-  submitButtonText: {
-    color: "white",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  orderMoreButton: {
-    backgroundColor: "#FAEDCD", // Change the color to your desired theme
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-    alignItems: "center",
-  },
-  orderMoreButtonText: {
-    color: "black",
-    fontSize: 14,
-    fontWeight: "bold",
   },
 });

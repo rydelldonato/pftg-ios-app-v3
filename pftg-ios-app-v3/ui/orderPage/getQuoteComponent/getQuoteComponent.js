@@ -76,13 +76,13 @@ export default function getQuote(props) {
         ></TextInput>
         <View style={styles.buttonContainer}>
           <TouchableHighlight onPress={() => setCartModal(false)}>
-            <View style={styles.orderMoreButton}>
+            <View style={[styles.orderMoreButton,{width: 150}]}>
               <Text style={styles.orderMoreButtonText}>Order More</Text>
             </View>
           </TouchableHighlight>
           <TouchableHighlight onPress={handleSubmit}>
-            <View style={styles.submitButton}>
-              <Text style={styles.submitButtonText}>Proceed To Checkout</Text>
+            <View style={[styles.submitButton,{width: 150}]}>
+              <Text style={styles.submitButtonText}>Review & Pay</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
   },
   orderMoreButton: {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   orderMoreButtonText: {
     color: "black",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
   },
 });

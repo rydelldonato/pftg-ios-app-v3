@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
   },
   mainText: {
     fontFamily: "Montserrat_700Bold",
+    fontSize: 20
   },
 });

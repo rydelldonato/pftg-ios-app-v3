@@ -50,7 +50,7 @@ export default function cartComponentItems() {
 console.log('cart Items',cartItems);
   const Item = ({ title, image, price, quantity, onPress }) => (
     <TouchableOpacity onPress={onPress}>
-      <View style={{ width: 370 }}>
+      <View style={{ width: 370, paddingTop: 20 }}>
         <View style={[styles.item, { flexDirection: "row" }]}>
           <Image
             style={{

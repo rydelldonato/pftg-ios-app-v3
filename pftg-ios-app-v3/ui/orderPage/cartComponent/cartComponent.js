@@ -80,7 +80,7 @@ export default function CartComponent() {
                   <View style={{ display: "flex", height: "70%" }}>
                     <CartComponentItems />
                   </View>
-                    <View>
+                    <View style={styles.cartButtons}>
                       <CartButtons
                         setCartModal={setCartModal}
                         cartModal={cartModal}
@@ -169,4 +169,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: "#FAEDCD",
   },
+  cartButtons:{
+    paddingTop: 100
+  }
 });

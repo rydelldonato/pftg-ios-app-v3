@@ -1,7 +1,8 @@
 import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
 import React from "react";
 
-export default function cartButtons() {
+export default function cartButtons(props) {
+  const {setCartModal, cartModal} = props
   return (
     <View>
       <View style={styles.buttonContainer}>
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignItems: "center",
     marginBottom: 3,
+    borderWidth: 1
   },
   buttonContainer: {
     display: "flex",
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 4,
     alignItems: "center",
+    borderWidth: 1
   },
   orderMoreButtonText: {
     color: "black",

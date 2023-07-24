@@ -14,6 +14,10 @@ export default function subtotal(props) {
     // Add the item's price multiplied by its quantity to the total
     total += itemPrice * item.quantity;
   });
+
+   // Round the total to 2 decimal places
+   total = total.toFixed(2);
+
   return (
     <View>
       <View style={styles.container}>

@@ -23,101 +23,60 @@ import CartProvider from "./ui/orderPage/cartComponent/cartProvider";
 import AppWrapper from "./pages/appWrapper";
 import CartComponent from "./ui/orderPage/cartComponent/cartComponent";
 import ReviewAndPay from "./pages/reviewAndPay/reviewAndPay";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("Welcome");
 
+  // Function to hide the footer on certain pages
+  const shouldShowFooter = (routeName) => {
+    return !(routeName === "Welcome" || routeName === "Review and Pay");
+  };
+  const shouldShowCartComponent = (routeName) => {
+    return !(routeName === "Welcome" || routeName === "Review and Pay");
+  };
   return (
     <>
       <CartProvider>
         <NavigationContainer>
-        <CartComponent />
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Welcome"
-              options={{ title: "Welcome", headerShown: false }}
-            >
+        {shouldShowCartComponent(currentPage) && <CartComponent />}
+          <Stack.Navigator
+            screenOptions={({ route }) => ({
+              headerShown: false,
+              gestureEnabled: false,
+            })}
+          >
+            <Stack.Screen name="Welcome">
               {() => <Welcome setCurrentPage={setCurrentPage} />}
             </Stack.Screen>
-            <Stack.Screen
-              name="Home"
-              component={HomePage}
-              options={{ title: "Home", headerShown: false, gestureEnabled: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Order"
-              component={OrderPage}
-              options={{ title: "Order", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Sisig"
-              component={Sisig}
-              options={{ title: "Sisig", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Sandwiches"
-              component={Sandwiches}
-              options={{ title: "Sandwiches", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Lumpia"
-              component={Lumpia}
-              options={{ title: "Lumpia", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Peachy's Combo"
-              component={PeachysCombo}
-              options={{ title: `Peachy's Combo`, headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Dessert"
-              component={Dessert}
-              options={{ title: "Dessert", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Beverages"
-              component={Beverages}
-              options={{ title: "Beverages", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Deals"
-              component={DealsPage}
-              options={{ title: "Deals", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="More"
-              component={MorePage}
-              options={{ title: "More", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Locations"
-              component={Locations}
-              options={{ title: "Locations", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Contact"
-              component={ContactPage}
-              options={{ title: "Contact", headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="Profile"
-              component={Profile}
-              options={{ title: "Profile", headerShown: false }}
-            ></Stack.Screen>
+            <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="Order" component={OrderPage} />
+            <Stack.Screen name="Sisig" component={Sisig} />
+            <Stack.Screen name="Sandwiches" component={Sandwiches} />
+            <Stack.Screen name="Lumpia" component={Lumpia} />
+            <Stack.Screen name="Peachy's Combo" component={PeachysCombo} />
+            <Stack.Screen name="Dessert" component={Dessert} />
+            <Stack.Screen name="Beverages" component={Beverages} />
+            <Stack.Screen name="Deals" component={DealsPage} />
+            <Stack.Screen name="More" component={MorePage} />
+            <Stack.Screen name="Locations" component={Locations} />
+            <Stack.Screen name="Contact" component={ContactPage} />
+            <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen
               name="Personal Settings"
               component={PersonalSettings}
-              options={{ title: "Personal Settings", headerShown: false }}
-            ></Stack.Screen>
+            />
             <Stack.Screen
               name="Review and Pay"
-              component={ReviewAndPay}
               options={{ title: "Review and Pay", headerShown: false }}
-            ></Stack.Screen>
+            >
+              {/* Pass the setCurrentPage prop to the ReviewAndPay component */}
+              {() => <ReviewAndPay setCurrentPage={setCurrentPage} />}
+            </Stack.Screen>
           </Stack.Navigator>
 
-          {currentPage !== "Welcome" && <GeneralFooter />}
+          {shouldShowFooter(currentPage) && <GeneralFooter />}
           <StatusBar style="auto" />
         </NavigationContainer>
       </CartProvider>

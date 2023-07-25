@@ -8,6 +8,7 @@ export default function cartButtons(props) {
   const {setCartModal, cartModal} = props
 
   const handleReviewAndPayButton = () => {
+    setCartModal(false)
     navigation.navigate("Review and Pay")
   }
   return (

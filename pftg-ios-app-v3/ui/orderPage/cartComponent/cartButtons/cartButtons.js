@@ -1,8 +1,15 @@
 import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function cartButtons(props) {
+  const navigation = useNavigation();
   const {setCartModal, cartModal} = props
+
+  const handleReviewAndPayButton = () => {
+    navigation.navigate("Review and Pay")
+  }
   return (
     <View>
       <View style={styles.buttonContainer}>
@@ -11,7 +18,7 @@ export default function cartButtons(props) {
             <Text style={styles.orderMoreButtonText}>Order More</Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight>
+        <TouchableHighlight onPress={handleReviewAndPayButton}>
           <View style={[styles.reviewAndPayButton, { width: 150 }]}>
             <Text style={styles.reviewAndPayButtonText}>Review & Pay</Text>
           </View>

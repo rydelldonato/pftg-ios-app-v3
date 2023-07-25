@@ -22,7 +22,7 @@ import PersonalSettings from "./pages/personal-settings-page/personalSettings";
 import CartProvider from "./ui/orderPage/cartComponent/cartProvider";
 import AppWrapper from "./pages/appWrapper";
 import CartComponent from "./ui/orderPage/cartComponent/cartComponent";
-
+import ReviewAndPay from "./pages/reviewAndPay/reviewAndPay";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -31,8 +31,8 @@ export default function App() {
   return (
     <>
       <CartProvider>
-        <CartComponent />
         <NavigationContainer>
+        <CartComponent />
           <Stack.Navigator>
             <Stack.Screen
               name="Welcome"
@@ -109,6 +109,11 @@ export default function App() {
               name="Personal Settings"
               component={PersonalSettings}
               options={{ title: "Personal Settings", headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Review and Pay"
+              component={ReviewAndPay}
+              options={{ title: "Review and Pay", headerShown: false }}
             ></Stack.Screen>
           </Stack.Navigator>
 

@@ -14,11 +14,13 @@ import CartComponentItems from "./cartComponentItems";
 import CartContext from "./cartContext";
 import CartButtons from "./cartButtons/cartButtons";
 
+
 export default function CartComponent() {
   const [cartModal, setCartModal] = useState(false);
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(CartContext);
   const [scaleValue] = useState(new Animated.Value(1));
+
 
   const animateCartContainer = () => {
     Animated.timing(scaleValue, {

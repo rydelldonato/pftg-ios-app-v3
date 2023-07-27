@@ -9,11 +9,12 @@ import {
 import React, { useContext, useState } from "react";
 import CartContext from "./cartContext";
 import Subtotal from "./subtotal/subtotal";
+import { useSubtotal } from "./subtotal/subtotal";
 
 export default function cartComponentItems() {
   const { cartItems, addToCart, updateCartItems, removeFromCart, clearCart } =
     useContext(CartContext);
-
+  useSubtotal(cartItems);
   const subtractQuantity = (title) => {
     //find the cart item that matches the item that was touched
     let foundItem = cartItems.find((item) => item.name === title);
@@ -34,20 +35,20 @@ export default function cartComponentItems() {
     }
   };
 
-  const addQuantity = (title) =>{
+  const addQuantity = (title) => {
     let foundItem = cartItems.find((item) => item.name === title);
     if (foundItem) {
       const updatedItem = {
         ...foundItem,
         quantity: foundItem.quantity + 1,
       };
-        const updatedCartItems = cartItems.map((item) => {
-          return item.name === title ? updatedItem : item;
-        });
-        return updateCartItems(updatedCartItems);
+      const updatedCartItems = cartItems.map((item) => {
+        return item.name === title ? updatedItem : item;
+      });
+      return updateCartItems(updatedCartItems);
     }
-  }
-console.log('cart Items',cartItems);
+  };
+  console.log("cart Items", cartItems);
   const Item = ({ title, image, price, quantity, onPress }) => (
     <TouchableOpacity onPress={onPress}>
       <View style={{ width: 370, paddingTop: 20 }}>
@@ -104,7 +105,7 @@ console.log('cart Items',cartItems);
         )}
         keyExtractor={(item) => item.id}
       />
-      <Subtotal cartItems={cartItems}/>
+      <Subtotal cartItems={cartItems} />
     </View>
   );
 }

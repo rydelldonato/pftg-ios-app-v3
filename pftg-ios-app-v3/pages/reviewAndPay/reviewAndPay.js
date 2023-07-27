@@ -1,8 +1,14 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import Subtotal from "../../ui/orderPage/cartComponent/subtotal/subtotal";
+import CartContext from "../../ui/orderPage/cartComponent/cartContext";
+
+import { useSubtotal } from "../../ui/orderPage/cartComponent/subtotal/subtotal";
 
 export default function ReviewAndPay({ setCurrentPage }) {
+  const { cartItems, addToCart, updateCartItems, removeFromCart, clearCart } =
+    useContext(CartContext);
   // Call the setCurrentPage function when the component mounts
   useEffect(() => {
     setCurrentPage("Review and Pay");
@@ -14,6 +20,11 @@ export default function ReviewAndPay({ setCurrentPage }) {
     setCurrentPage("");
     navigation.goBack();
   };
+  // Use the custom hook to get the total value
+  const total = useSubtotal(cartItems);
+
+  const salesTax = (total * 0.0725).toFixed(2)
+  const totalWithTax = (parseFloat(total) + parseFloat(salesTax)).toFixed(2)
 
   return (
     <View style={{ flex: 1, backgroundColor: "#82B77D" }}>
@@ -84,16 +95,7 @@ export default function ReviewAndPay({ setCurrentPage }) {
       </View>
       <View style={{ display: "flex" }}>
         <Text>Order Summary</Text>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <Text>Subtotal</Text>
-          <Text>$1.00</Text>
-        </View>
+        <Subtotal cartItems={cartItems}/>
         <View
           style={{
             display: "flex",
@@ -102,7 +104,7 @@ export default function ReviewAndPay({ setCurrentPage }) {
           }}
         >
           <Text>Sales tax</Text>
-          <Text>$1.00</Text>
+          <Text>${salesTax}</Text>
         </View>
         <View
           style={{
@@ -112,7 +114,7 @@ export default function ReviewAndPay({ setCurrentPage }) {
           }}
         >
           <Text>Total</Text>
-          <Text>$1.00</Text>
+          <Text>${totalWithTax}</Text>
         </View>
       </View>
     </View>

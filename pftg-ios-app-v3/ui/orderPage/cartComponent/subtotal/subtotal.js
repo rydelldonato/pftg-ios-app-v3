@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function subtotal(props) {
-  const { cartItems } = props;
+export function useSubtotal(cartItems) {
   // Initialize the total to 0
   let total = 0;
 
@@ -15,8 +14,15 @@ export default function subtotal(props) {
     total += itemPrice * item.quantity;
   });
 
-   // Round the total to 2 decimal places
-   total = total.toFixed(2);
+  // Round the total to 2 decimal places
+  total = total.toFixed(2);
+
+  return total;
+}
+
+function Subtotal(props) {
+  const { cartItems } = props;
+  const total = useSubtotal(cartItems);
 
   return (
     <View>
@@ -32,11 +38,13 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
     display: "flex",
-    flexDirection: 'row',
-    justifyContent: 'space-between' 
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   mainText: {
     fontFamily: "Montserrat_700Bold",
-    fontSize: 20
+    fontSize: 20,
   },
 });
+
+export default Subtotal;

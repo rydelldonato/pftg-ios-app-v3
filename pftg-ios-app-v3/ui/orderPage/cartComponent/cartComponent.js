@@ -14,13 +14,11 @@ import CartComponentItems from "./cartComponentItems";
 import CartContext from "./cartContext";
 import CartButtons from "./cartButtons/cartButtons";
 
-
 export default function CartComponent() {
   const [cartModal, setCartModal] = useState(false);
   const { cartItems, addToCart, removeFromCart, clearCart } =
     useContext(CartContext);
   const [scaleValue] = useState(new Animated.Value(1));
-
 
   const animateCartContainer = () => {
     Animated.timing(scaleValue, {
@@ -35,7 +33,13 @@ export default function CartComponent() {
       }).start();
     });
   };
-
+  const circleSize = 30; // Set the initial size for the circle
+  console.log(cartItems.length);
+  // Assuming your cartItems variable contains the cart items array you provided
+  const cartItemsCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
   return (
     <View style={styles.container}>
       {cartItems.length > 0 ? (
@@ -55,6 +59,28 @@ export default function CartComponent() {
             >
               <View style={{ paddingRight: 150, paddingTop: 10 }}>
                 <Text>Checkout Now</Text>
+                <View
+                  style={{
+                    position: "absolute",
+                    left: 218,
+                    bottom: 20,
+                    width: circleSize, // Set width and height to create a circular shape
+                    height: circleSize,
+                    borderRadius: circleSize / 2, // Make the borderRadius half of the circle's size
+                    backgroundColor: "#FEFEFE", // Background color to show the circle
+                    alignItems: "center", // Center the child element horizontally
+                    justifyContent: "center", // Center the child element vertically
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      textAlign: "center",
+                    }}
+                  >
+                    {cartItemsCount}
+                  </Text>
+                </View>
               </View>
               <View style={styles.imageContainer}>
                 <Image
@@ -82,12 +108,12 @@ export default function CartComponent() {
                   <View style={{ display: "flex", height: "70%" }}>
                     <CartComponentItems />
                   </View>
-                    <View style={styles.cartButtons}>
-                      <CartButtons
-                        setCartModal={setCartModal}
-                        cartModal={cartModal}
-                      />
-                    </View>
+                  <View style={styles.cartButtons}>
+                    <CartButtons
+                      setCartModal={setCartModal}
+                      cartModal={cartModal}
+                    />
+                  </View>
                 </View>
               </View>
             </View>
@@ -171,7 +197,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: "#FAEDCD",
   },
-  cartButtons:{
-    paddingTop: 100
-  }
+  cartButtons: {
+    paddingTop: 100,
+  },
 });

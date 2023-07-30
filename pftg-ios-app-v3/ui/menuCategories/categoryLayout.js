@@ -180,7 +180,7 @@ export default function categoryLayout(props) {
           elevation: 5,
         }}
       ></View>
-      <View style={{ height: "80%" }}>
+      <View style={{ height: "80%",paddingBottom: 60 }}>
         <FlatList
           style={{
             flex: 1,

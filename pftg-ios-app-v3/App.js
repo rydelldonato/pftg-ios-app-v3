@@ -40,7 +40,7 @@ export default function App() {
     <>
       <CartProvider>
         <NavigationContainer>
-        {shouldShowCartComponent(currentPage) && <CartComponent />}
+          {shouldShowCartComponent(currentPage) && <CartComponent />}
           <Stack.Navigator
             screenOptions={({ route }) => ({
               headerShown: false,

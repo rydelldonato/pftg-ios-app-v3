@@ -1,14 +1,16 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Subtotal from "../../ui/orderPage/cartComponent/subtotal/subtotal";
 import CartContext from "../../ui/orderPage/cartComponent/cartContext";
+import GetQuote from "../../ui/orderPage/getQuoteComponent/getQuoteComponent";
 
 import { useSubtotal } from "../../ui/orderPage/cartComponent/subtotal/subtotal";
 
 export default function ReviewAndPay({ setCurrentPage }) {
   const { cartItems, addToCart, updateCartItems, removeFromCart, clearCart } =
     useContext(CartContext);
+  const [deliveryFee, setDeliveryFee] = useState(0)
   // Call the setCurrentPage function when the component mounts
   useEffect(() => {
     setCurrentPage("Review and Pay");
@@ -36,7 +38,7 @@ export default function ReviewAndPay({ setCurrentPage }) {
       <View
         style={{
           display: "flex",
-          marginVertical: 120,
+          marginTop: 120,
           marginLeft: 14,
           marginRight: 14,
         }}
@@ -93,9 +95,20 @@ export default function ReviewAndPay({ setCurrentPage }) {
           </View>
         </View>
       </View>
+      <GetQuote/>
       <View style={{ display: "flex" }}>
         <Text>Order Summary</Text>
         <Subtotal cartItems={cartItems}/>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text>Delivery fee</Text>
+          <Text>${deliveryFee}</Text>
+        </View>
         <View
           style={{
             display: "flex",

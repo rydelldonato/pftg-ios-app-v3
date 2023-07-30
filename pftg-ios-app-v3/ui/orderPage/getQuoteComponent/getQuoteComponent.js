@@ -39,7 +39,7 @@ export default function getQuote() {
     // Handle form submission
     getQuoteFunction(quoteData)
       .then((data) => {
-        console.log(data);
+        console.log(data.fee);
       })
       .catch((error) => {
         if (error.message === "Request failed with status code 400") {
@@ -52,34 +52,43 @@ export default function getQuote() {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.mainHeading}>
-          Please Enter The Full Dropoff Address
-        </Text>
-        <Text style={styles.subHeading}>
-          Street Address, City, State, ZIP Code, Country
-        </Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="123 Main St, City, State, ZIP"
-          onChangeText={handleChangeAddress}
-        ></TextInput>
-        <Text style={styles.mainHeading}>
-          Please Enter The Dropoff Phone Number
-        </Text>
-        <Text style={styles.subHeading}>Enter Your Phone Number</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="(555) 123-4567"
-          keyboardType="numeric"
-          onChangeText={handleChangePhoneNumber}
-        ></TextInput>
+        {/* Form for dropoff address */}
+        <View>
+          <Text style={styles.mainHeading}>
+            Please Enter The Full Dropoff Address
+          </Text>
+          <Text style={styles.subHeading}>
+            Street Address, City, State, ZIP Code, Country
+          </Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder="123 Main St, City, State, ZIP"
+            onChangeText={handleChangeAddress}
+          ></TextInput>
+        </View>
+
+        {/* Form for dropoff phone number */}
+        <View>
+          <Text style={styles.mainHeading}>
+            Please Enter The Dropoff Phone Number
+          </Text>
+          <Text style={styles.subHeading}>Enter Your Phone Number</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder="(555) 123-4567"
+            onChangeText={handleChangePhoneNumber}
+          ></TextInput>
+        </View>
+
+        {/* Submit button */}
+        <Button title="Submit" onPress={handleSubmit} />
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#82B77D",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -88,6 +97,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 3.84,
     elevation: 5,
+    marginTop: 10,
+    marginBottom: 10
   },
   mainHeading: {
     fontSize: 12,
@@ -97,12 +108,12 @@ const styles = StyleSheet.create({
   subHeading: {
     fontSize: 8,
     fontWeight: "bold",
-    color: "gray",
+    color: "black",
     fontFamily: "Montserrat_400Regular",
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "black",
     borderRadius: 4,
     padding: 10,
     fontSize: 16,

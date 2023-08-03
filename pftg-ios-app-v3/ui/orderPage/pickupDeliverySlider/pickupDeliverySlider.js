@@ -5,9 +5,12 @@ import {
   K2D_400Regular,
   K2D_600SemiBold,
 } from "@expo-google-fonts/k2d";
+import Address from "../address/address";
+import DeliveryInfo from "../deliveryInfo/deliveryInfo";
 
 export default function pickupDeliverySlider() {
   const [isDeliverySelected, setIsDeliverySelected] = useState(false);
+  const [deliveryInfoModal, setDeliveryInfoModal] = useState(false);
 
   let [fontsLoaded] = useFonts({
     K2D_400Regular,
@@ -16,32 +19,46 @@ export default function pickupDeliverySlider() {
   if (!fontsLoaded) {
     return null;
   }
-  const handleButtonPress = () => {
+  const handlePickupButton = () => {
     setIsDeliverySelected(!isDeliverySelected);
   };
 
+  const handleDeliveryButton = () => {
+    setIsDeliverySelected(!isDeliverySelected);
+    setDeliveryInfoModal(!deliveryInfoModal);
+  };
+
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          isDeliverySelected ? styles.buttonSelected : styles.buttonNotSelected,
-        ]}
-        onPress={handleButtonPress}
-      >
-        <Text style={styles.buttonText}>Pickup</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          !isDeliverySelected
-            ? styles.buttonSelected
-            : styles.buttonNotSelected,
-        ]}
-        onPress={handleButtonPress}
-      >
-        <Text style={styles.buttonText}>Delivery</Text>
-      </TouchableOpacity>
+    <View>
+      <DeliveryInfo
+        setDeliveryInfoModal={setDeliveryInfoModal}
+        deliveryInfoModal={deliveryInfoModal}
+      />
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            isDeliverySelected
+              ? styles.buttonSelected
+              : styles.buttonNotSelected,
+          ]}
+          onPress={handlePickupButton}
+        >
+          <Text style={styles.buttonText}>Pickup</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            !isDeliverySelected
+              ? styles.buttonSelected
+              : styles.buttonNotSelected,
+          ]}
+          onPress={handleDeliveryButton}
+        >
+          <Text style={styles.buttonText}>Delivery</Text>
+        </TouchableOpacity>
+      </View>
+      <Address />
     </View>
   );
 }

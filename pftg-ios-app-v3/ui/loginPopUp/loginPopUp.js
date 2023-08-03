@@ -114,12 +114,14 @@ export default function loginPopUp(props) {
             </Text>
             <View>
               <TextInput
+              placeholderTextColor={'black'}
                 placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
                 style={styles.input}
               />
               <TextInput
+              placeholderTextColor={'black'}
                 placeholder="Password"
                 value={password}
                 onChangeText={setPassword}

@@ -79,9 +79,10 @@ export default function getQuote() {
             onChangeText={handleChangePhoneNumber}
           ></TextInput>
         </View>
-
+        <View style={styles.container}>
+        <Button color={'white'} title="Calculate Delivery Fee" onPress={handleSubmit} />
+        </View>
         {/* Submit button */}
-        <Button title="Submit" onPress={handleSubmit} />
       </View>
     </View>
   );

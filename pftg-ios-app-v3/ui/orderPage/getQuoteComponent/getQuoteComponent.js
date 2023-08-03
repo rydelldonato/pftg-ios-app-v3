@@ -14,8 +14,9 @@ import axios from "axios";
 import getQuoteFunction from "../../../backend/getQuote";
 import jwtDecode from "jwt-decode";
 
-export default function getQuote() {
+export default function getQuote(props) {
   // uuidv4({ random: getRandomValues });
+  const { setDeliveryFee } = props;
   const [quoteData, setQuoteData] = useState({
     external_delivery_id: uuidv4(),
     pickup_address: "110 N El Dorado St, Stockton, CA 95202, USA",
@@ -40,6 +41,7 @@ export default function getQuote() {
     getQuoteFunction(quoteData)
       .then((data) => {
         console.log(data.fee);
+        setDeliveryFee(data.fee)
       })
       .catch((error) => {
         if (error.message === "Request failed with status code 400") {
@@ -49,6 +51,7 @@ export default function getQuote() {
       });
     console.log("Input value:", quoteData);
   };
+
   return (
     <View>
       <View style={styles.container}>
@@ -80,7 +83,11 @@ export default function getQuote() {
           ></TextInput>
         </View>
         <View style={styles.container}>
-        <Button color={'white'} title="Calculate Delivery Fee" onPress={handleSubmit} />
+          <Button
+            color={"white"}
+            title="Calculate Delivery Fee"
+            onPress={handleSubmit}
+          />
         </View>
         {/* Submit button */}
       </View>
@@ -99,7 +106,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   mainHeading: {
     fontSize: 12,

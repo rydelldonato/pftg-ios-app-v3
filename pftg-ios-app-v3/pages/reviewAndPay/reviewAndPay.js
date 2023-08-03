@@ -10,7 +10,7 @@ import { useSubtotal } from "../../ui/orderPage/cartComponent/subtotal/subtotal"
 export default function ReviewAndPay({ setCurrentPage }) {
   const { cartItems, addToCart, updateCartItems, removeFromCart, clearCart } =
     useContext(CartContext);
-  const [deliveryFee, setDeliveryFee] = useState(0)
+  const [deliveryFee, setDeliveryFee] = useState(0);
   // Call the setCurrentPage function when the component mounts
   useEffect(() => {
     setCurrentPage("Review and Pay");
@@ -25,8 +25,13 @@ export default function ReviewAndPay({ setCurrentPage }) {
   // Use the custom hook to get the total value
   const total = useSubtotal(cartItems);
 
-  const salesTax = (total * 0.0725).toFixed(2)
-  const totalWithTax = (parseFloat(total) + parseFloat(salesTax)).toFixed(2)
+  const salesTax = (total * 0.0725).toFixed(2);
+  const formattedFee = (deliveryFee / 100).toFixed(2);
+  const totalWithTax = (
+    parseFloat(total) +
+    parseFloat(salesTax) +
+    parseFloat(formattedFee)
+  ).toFixed(2);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#82B77D" }}>
@@ -95,10 +100,10 @@ export default function ReviewAndPay({ setCurrentPage }) {
           </View>
         </View>
       </View>
-      <GetQuote/>
+      <GetQuote setDeliveryFee={setDeliveryFee} />
       <View style={{ display: "flex" }}>
         <Text>Order Summary</Text>
-        <Subtotal cartItems={cartItems}/>
+        <Subtotal cartItems={cartItems} />
         <View
           style={{
             display: "flex",
@@ -107,7 +112,7 @@ export default function ReviewAndPay({ setCurrentPage }) {
           }}
         >
           <Text>Delivery fee</Text>
-          <Text>${deliveryFee}</Text>
+          <Text>${formattedFee}</Text>
         </View>
         <View
           style={{

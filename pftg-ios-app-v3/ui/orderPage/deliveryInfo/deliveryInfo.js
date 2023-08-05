@@ -18,7 +18,7 @@ export default function deliveryInfo(props) {
   if (currentUser) {
     // User is signed in
     // You can use this information to display user-specific data or perform other operations
-    currentUser.address = 'new address'
+    currentUser.address = "new address";
     console.log(currentUser);
   } else {
     // User is not signed in
@@ -26,8 +26,8 @@ export default function deliveryInfo(props) {
   }
   const DATA = [
     {
-      id: "Personal Settings",
-      title: "Personal Settings",
+      id: "Add a New Address",
+      title: "Add a New Address",
       //I want a specific modal to pop up based on the category pressed
       //
     },
@@ -57,15 +57,16 @@ export default function deliveryInfo(props) {
                   fontFamily: "Montserrat_700Bold",
                   marginTop: 12,
                   opacity: 0.8,
+                  paddingLeft: 20,
                 },
               ]}
             >
               {title}
             </Text>
           </View>
-          <View style={{ marginTop: 12 }}>
+          <View style={{ marginTop: 12, paddingRight: 20 }}>
             <Image
-              style={{ marginRight: 31, opacity: 0.8 }}
+              style={{ opacity: 0.8 }}
               source={require("../../../assets/moreThan.png")}
             />
           </View>
@@ -129,7 +130,13 @@ export default function deliveryInfo(props) {
               Where's your order going?
             </Text>
             <FlatList
-              style={{ height: 480, marginTop: 4 }}
+              style={{
+                height: 480,
+                marginTop: 4,
+                width: 370,
+                marginLeft: 20,
+                marginRight: 20,
+              }}
               data={DATA}
               renderItem={({ item }) => (
                 <Item

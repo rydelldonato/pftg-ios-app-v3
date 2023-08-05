@@ -18,10 +18,11 @@ export default function deliveryInfo(props) {
   if (currentUser) {
     // User is signed in
     // You can use this information to display user-specific data or perform other operations
-    console.log(uid, email, displayName);
+    currentUser.address = 'new address'
+    console.log(currentUser);
   } else {
     // User is not signed in
-    console.log("No user is currently signed in.");
+    console.log("hello, No user is currently signed in.");
   }
   const DATA = [
     {

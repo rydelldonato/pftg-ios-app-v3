@@ -11,8 +11,10 @@ import {
 } from "react-native";
 import { auth } from "../../../firebase";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function deliveryInfo(props) {
+  let navigation = useNavigation()
   const { deliveryInfoModal, setDeliveryInfoModal } = props;
   const currentUser = auth.currentUser;
   if (currentUser) {
@@ -26,7 +28,7 @@ export default function deliveryInfo(props) {
   }
   const DATA = [
     {
-      id: "Add a New Address",
+      id: "DeliveryInfoPage",
       title: "Add a New Address",
       //I want a specific modal to pop up based on the category pressed
       //
@@ -141,7 +143,7 @@ export default function deliveryInfo(props) {
               renderItem={({ item }) => (
                 <Item
                   title={item.title}
-                  onPress={() => navigation.navigate(item.title)}
+                  onPress={() => navigation.navigate(item.id)}
                 />
               )}
               keyExtractor={(item) => item.id}

@@ -1,7 +1,7 @@
-import { View, Text, TextInput, TouchableHighlight } from "react-native";
+import { View, Text, TextInput, TouchableHighlight, Modal } from "react-native";
 import React, { useState } from "react";
 
-export default function addressInput() {
+export default function addressInput(props) {
   const [address, setAddress] = useState("");
   const [optional, setOptional] = useState("");
 
@@ -28,7 +28,9 @@ export default function addressInput() {
         />
         <Text>Apartment suite, floor (optional)</Text>
         <TextInput value={optional} onChangeText={setOptional} placeholder="" />
-        <TouchableHighlight onPress={handleSubmit}></TouchableHighlight>
+        <TouchableHighlight onPress={handleSubmit}>
+            <Text>Submit</Text>
+        </TouchableHighlight>
       </View>
     </View>
   );

@@ -23,6 +23,7 @@ import CartProvider from "./ui/orderPage/cartComponent/cartProvider";
 import AppWrapper from "./pages/appWrapper";
 import CartComponent from "./ui/orderPage/cartComponent/cartComponent";
 import ReviewAndPay from "./pages/reviewAndPay/reviewAndPay";
+import DeliveryInfoPage from "./pages/delivery-info-page/deliveryInfoPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,7 @@ export default function App() {
             <Stack.Screen name="Locations" component={Locations} />
             <Stack.Screen name="Contact" component={ContactPage} />
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="DeliveryInfoPage" component={DeliveryInfoPage} />
             <Stack.Screen
               name="Personal Settings"
               component={PersonalSettings}

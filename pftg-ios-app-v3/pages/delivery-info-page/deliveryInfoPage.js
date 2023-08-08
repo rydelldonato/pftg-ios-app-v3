@@ -4,8 +4,7 @@ import AddressInput from '../../ui/orderPage/deliveryInfo/addressInput'
 
 export default function DeliveryInfoPage() {
   return (
-    <View>
-      <Text>deliveryInfoPage</Text>
+    <View style={{flex:1}}>
       <AddressInput/>
     </View>
   )
